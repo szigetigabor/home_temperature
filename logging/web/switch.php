@@ -47,10 +47,12 @@ include 'menu.php';
 
 <center>
 <table>
+  <thead>
   <tr>
-     <td><b>device</b></td>
-     <td><b>switch name</b></td>
+     <th>device</th>
+     <th>switch name</th>
   </tr>
+  </thead>
 
 <?php
 //print each sensor device
@@ -77,3 +79,6 @@ foreach($devices as $device)
 ?>
 </table>
 </center>
+
+<a href="add_switch.php" class="buttonclass">Add new switch</a>
+

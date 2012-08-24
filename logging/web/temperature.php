@@ -59,7 +59,8 @@ if ($get_realtime == "1") {
     $get_param="";
 }  
 $own_name = substr(getenv('SCRIPT_NAME'),1);
-echo "<a href=\"".$own_name.$get_param."\"><button type=\"button\">Move to $button_label</button></a>";
+echo "<a href=\"".$own_name.$get_param."\" class=\"buttonclass\">Move to $button_label</a>";
+
 echo "<p>";
 // FORM END
 

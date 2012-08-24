@@ -45,10 +45,12 @@ include 'menu.php';
 ?>
 <center>
 <table>
+  <thead>
   <tr>
-     <td><b>device</b></td>
-     <td><b>alias name</b></td>
+     <th>device</th>
+     <th>alias name</th>
   </tr>
+  </thead>
 
 <?php
 //print each sensor device
