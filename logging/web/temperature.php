@@ -36,6 +36,11 @@ foreach($_POST as $key=>$value)
 {
  $file = $sensors_settings_path."/".$key."/alarm";
  write_file($file,$value);
+
+ // update the relays
+ $command = "$sensors_settings_path/alarm_checking.sh";
+ exec ($command, $output);
+ //$output = system($command, $retval);
 }
 //FORM END
 
