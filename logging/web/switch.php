@@ -6,7 +6,7 @@ $sensors_path = "/sys/bus/w1/devices/";
 $sensors_settings_path = "/home/pi/logging";
 
 function read_file($path){
-    f (!file_exists($path)) {
+    if (!file_exists($path)) {
       return "";
     }
     $fn = fopen($path, "r");
