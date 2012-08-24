@@ -1,3 +1,20 @@
+<div id='cssmenu'>
+<ul>
+   <li class='active '><a href='temperature.php'><span>Home</span></a></li>
+   <li class='has-sub '><a href='#'><span>Settings</span></a>
+      <ul>
+         <li><a href='alias.php'><span>Alias</span></a></li>
+         <li><a href='switch.php'><span>Switch</span></a></li>
+      </ul>
+   </li>
+   <li><a href='#'><span>About</span></a></li>
+   <li><a href='#'><span>Contact</span></a></li>
+</ul>
+</div>
+<p>
+
+<?php
+/*
 <table id="menu">
   <tr id="menu">
      <td id="menu_temp"><a href="temperature.php" class="buttonclass">Temperature</a></td>
