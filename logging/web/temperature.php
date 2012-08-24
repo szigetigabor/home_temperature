@@ -6,6 +6,9 @@ $sensors_path = "/sys/bus/w1/devices/";
 $sensors_settings_path = "/home/pi/logging";
 
 function read_file($path){
+    if (!file_exists($path)) {
+      return "";
+    }
     $fn = fopen($path, "r");
     $retval = fread($fn,filesize($path));
     fclose($fn);
@@ -38,7 +41,10 @@ foreach($_POST as $key=>$value)
 
 
 // GET FORM START
-$get_realtime=$_GET["realtime"];
+$get_realtime="";
+if (isset($_GET["realtime"])) {
+  $get_realtime=$_GET["realtime"];
+}
 
 echo "<p>";
 $button_label = "RealTime values!";
