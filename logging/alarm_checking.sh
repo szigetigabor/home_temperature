@@ -7,6 +7,9 @@ sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
 
 for line in $sensors
 do
+   if [[ $# == 1 && $1 != $line ]]; then
+      continue
+   fi
    if [ -d $sensor_settings_path/$line ]; then
       if [ ! -e $sensor_settings_path/$line/value ]; then
           continue
@@ -48,10 +51,10 @@ do
       #echo $temp
       #echo $alarm
       if [ $temp -lt $alarm ]; then
-        echo "hűteni kell";
+        echo "$line: heating ON";
         echo on > $sensor_settings_path/$line/onoff
       else
-        echo "fűtés kikapcs";
+        echo "$line: heating OFF";
         echo off > $sensor_settings_path/$line/onoff
       fi
   fi

@@ -38,7 +38,7 @@ foreach($_POST as $key=>$value)
  write_file($file,$value);
 
  // update the relays
- $command = "$sensors_settings_path/alarm_checking.sh";
+ $command = "$sensors_settings_path/alarm_checking.sh $key";
  exec ($command, $output);
  //$output = system($command, $retval);
 }
@@ -77,7 +77,7 @@ $devices = glob($sensors_path . "*");
      <th>current value</th>
      <th>required <br>temperature</th>
      <th>switch</th>
-     <th>on/off</th>
+     <th>heating <br>on/off</th>
   </tr>
   </thead>
 
