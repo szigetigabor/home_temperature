@@ -1,0 +1,53 @@
+table,td
+{
+  border:1px solid black;
+  text-align:center;
+  vertical-align:middle;
+}
+
+thead
+{
+  background-color:lightgray;
+}
+
+td#temperature
+{
+  border:1px solid black;
+  text-align:right;
+}
+
+td#on
+{
+  background-color:red;
+}
+
+td#off
+{
+  background-color:#00FF00; /* green*/
+}
+
+
+/* MENU style */
+
+table#menu,tr#menu
+{
+  border:0px solid black;
+}
+
+td#menu_temp
+{
+  border:0px solid black;
+  width:120px;
+}
+
+td#menu_alias
+{
+  border:0px solid black;
+  width:80px;
+}
+
+td#menu_switch
+{
+  border:0px solid black;
+}
+
