@@ -3,6 +3,7 @@
    <li class='active '><a href='temperature.php'><span>Home</span></a></li>
    <li class='has-sub '><a href='#'><span>Settings</span></a>
       <ul>
+         <li><a href='temperature.php'><span>Temperature</span></a></li>
          <li><a href='alias.php'><span>Alias</span></a></li>
          <li><a href='switch.php'><span>Switch</span></a></li>
       </ul>
@@ -23,3 +24,5 @@
   </tr>
 </table>
 <hr />
+*/
+?>
