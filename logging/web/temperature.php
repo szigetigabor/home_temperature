@@ -83,10 +83,16 @@ $devices = glob($sensors_path . "*");
   </thead>
 
 <?php
+// Filter option
+$filter = "28-";
+
 //print each sensor device
 foreach($devices as $device)
 {
   $device_name=substr($device, strrpos($device, "/")+1);
+  if ( $filter != substr($device_name,0,3) ) {
+    continue;
+  }
   $device_id=$device_name;
   $settings_path=$sensors_settings_path."/".$device_name;
   $filename=$settings_path."/value";
