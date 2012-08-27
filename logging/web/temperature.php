@@ -62,12 +62,49 @@ $own_name = substr(getenv('SCRIPT_NAME'),1);
 echo "<a href=\"".$own_name.$get_param."\" class=\"buttonclass\">Move to $button_label</a>";
 
 echo "<p>";
+
+$get_filter="28-";
+if (isset($_GET["filter"])) {
+  $get_filter=$_GET["filter"];
+}
+
 // FORM END
 
 
  
 //get all sensors files.
 $devices = glob($sensors_path . "*");
+
+
+echo "       <form method=\"get\">";
+echo "         <select name=\"filter\">";
+$selected = "";
+if ($get_filter == "") {
+  $selected = "selected=\"selected\"";
+}
+
+echo "           <option value=\"\" $selected>all</option>";
+$selected = "";
+if ($get_filter == "28-") {
+  $selected = "selected=\"selected\"";
+}
+echo "           <option value=\"28-\" $selected>Temperature</option>";
+$selected = "";
+if ($get_filter == "-") {
+  $selected = "selected=\"selected\"";
+}
+
+echo "           <option value=\"-\" $selected>Switch</option>";
+$selected = "";
+if ($get_filter == "w1_") {
+  $selected = "selected=\"selected\"";
+}
+
+echo "           <option value=\"w1_\" $selected>1-wire master</option>";
+echo "         </select>";
+echo "         <input type=\"submit\" value=\"Filter\">";
+echo "       </form>";
+
 
 ?>
 <center>
@@ -90,7 +127,7 @@ $filter = "28-";
 foreach($devices as $device)
 {
   $device_name=substr($device, strrpos($device, "/")+1);
-  if ( $filter != substr($device_name,0,3) ) {
+  if ( $get_filter != "" && $get_filter != substr($device_name,0,3) ) {
     continue;
   }
   $device_id=$device_name;
