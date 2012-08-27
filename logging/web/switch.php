@@ -15,8 +15,8 @@ function read_file($path){
     return $retval;
 }
 
-function write_file($path, $data){
-    $fn = fopen($path, 'w');
+function write_file($path, $data, $mode){
+    $fn = fopen($path, $mode);
     fwrite($fn, "$data\n");
     fclose($fn);
 }
@@ -28,10 +28,18 @@ $ip=$_SERVER['REMOTE_ADDR'];
 //echo "<br>Your IP Address= $ip"; 
 
 //POST FORM START
-foreach($_POST as $key=>$value)
-{
- $file = $sensors_settings_path."/".$key."/switch";
- write_file($file,$value);
+if ( isset($_POST) ){
+  $sensor_id=$_POST["temp_sensor_id"];
+  $file = $sensors_settings_path."/".$sensor_id."/switch";
+  $mode = 'w';
+  foreach($_POST as $key=>$value)
+  {
+   if ( $key == "temp_sensor_id" ) {
+     continue;
+   }
+   write_file($file,$value,$mode);
+   $mode = 'a';
+  }
 }
 //FORM END
 
@@ -60,16 +68,45 @@ foreach($devices as $device)
 {
   $device_name=substr($device, strrpos($device, "/")+1);
   $settings_path=$sensors_settings_path."/".$device_name;
+  $device_alias = read_file($settings_path."/alias");
 
   //SWITCH
   $switch = read_file($settings_path."/switch");
-  $switch = trim($switch, " \n.");
+  list($switch_id, $port) = split("\n", $switch);
 
   echo "  <tr>";
-  echo "     <td>$device_name</td>";
+  if ($device_alias != "") {
+     $device_alias = "<br>$device_alias";
+  }
+  echo "     <td>$device_name$device_alias</td>";
   echo "     <td>";
+  echo "       <img src=\"\" width=\"1\" height=\"15\">";
   echo "       <form method=\"post\">";
-  echo "         <input type=\"text\" name=\"$device_name\" value=\"$switch\" >";
+  echo "         <input type=\"hidden\" name=\"temp_sensor_id\" value=\"$device_name\" >";
+  echo "         <select name=\"switch_name\">";
+  //TODO: read switch ids
+  $switch_ids = array("swid1", "swid2");
+  $value = 1;
+  foreach( $switch_ids as &$id ){
+   $selected = "";
+   if ($id == $switch_id) {
+     $selected = "selected=\"selected\"";
+   }
+   echo "           <option value=\"$id\" $selected>sw$value</option>";
+   $value += 1;
+  }
+  echo "         </select>";
+
+  echo "         <select name=\"switch_port\">";
+  for ($i=0; $i<8; $i++) {
+   $value = $i+1;
+   $selected = "";
+   if ( $i == $port) {
+     $selected = "selected=\"selected\"";
+   }
+   echo "           <option value=\"$i\" $selected>$value</option>";
+  }
+  echo "         </select>";
   echo "         <input type=\"submit\" value=\"Set\">";
   echo "       </form>";
   echo "      </td>";
