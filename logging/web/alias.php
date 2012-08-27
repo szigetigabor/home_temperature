@@ -66,11 +66,12 @@ foreach($devices as $device)
   echo "  <tr>";
   echo "     <td>$device_name</td>";
   echo "     <td>";
+  echo "       <img src=\"\" width=\"1\" height=\"15\">";
   echo "       <form method=\"post\">";
   echo "         <input type=\"text\" name=\"$device_name\" value=\"$alias\" >";
   echo "         <input type=\"submit\" value=\"Set\">";
   echo "       </form>";
-  echo "      </td>";
+  echo "     </td>";
   echo "  </tr>";
 }
 

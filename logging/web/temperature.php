@@ -152,7 +152,8 @@ foreach($devices as $device)
   }
   if ( $disabled == "" || substr($device_id, 0, 2) == "28" ){
       echo "  <td>";
-      echo "      <form method=\"post\">";
+  echo "       <img src=\"\" width=\"1\" height=\"15\">";
+  echo "       <form method=\"post\">";
 //      echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $disabled>";
       echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" >";
       echo "      <input type=\"submit\" value=\"Set\">";
@@ -170,4 +171,3 @@ foreach($devices as $device)
 ?>
 </table>
 </center>
-<progress id="m1" value="0.33">test 1</progress>
