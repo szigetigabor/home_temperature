@@ -116,7 +116,7 @@ foreach($devices as $device)
    echo "           <option value=\"$i\" $selected>$value</option>";
   }
   echo "         </select>";
-  echo "         <input type=\"submit\" value=\"Set\">";
+  echo "         <input type=\"submit\" value=\"Set\" class=\"buttonclass\">";
   echo "       </form>";
   echo "      </td>";
   echo "  </tr>";

@@ -69,7 +69,7 @@ foreach($devices as $device)
   echo "       <img src=\"\" width=\"1\" height=\"15\">";
   echo "       <form method=\"post\">";
   echo "         <input type=\"text\" name=\"$device_name\" value=\"$alias\" >";
-  echo "         <input type=\"submit\" value=\"Set\">";
+  echo "         <input type=\"submit\" value=\"Set\" class=\"buttonclass\">";
   echo "       </form>";
   echo "     </td>";
   echo "  </tr>";
