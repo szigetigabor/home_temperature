@@ -32,13 +32,17 @@ if ( isset($_POST) ){
   $sensor_id=$_POST["temp_sensor_id"];
   $file = $sensors_settings_path."/".$sensor_id."/switch";
   $mode = 'w';
-  foreach($_POST as $key=>$value)
-  {
-   if ( $key == "temp_sensor_id" ) {
-     continue;
-   }
-   write_file($file,$value,$mode);
-   $mode = 'a';
+  if ( isset($_POST["switch_name"]) && $_POST["switch_name"] == "" ) {
+    write_file($file,"",$mode);
+  } else {
+    foreach($_POST as $key=>$value)
+    {
+      if ( $key == "temp_sensor_id" ) {
+        continue;
+      }
+      write_file($file,$value,$mode);
+      $mode = 'a';
+    }
   }
 }
 //FORM END
@@ -84,6 +88,7 @@ foreach($devices as $device)
   echo "       <form method=\"post\">";
   echo "         <input type=\"hidden\" name=\"temp_sensor_id\" value=\"$device_name\" >";
   echo "         <select name=\"switch_name\">";
+  echo "           <option value=\"\" $selected></option>";
   //TODO: read switch ids
   $switch_ids = array("swid1", "swid2");
   $value = 1;
@@ -97,11 +102,15 @@ foreach($devices as $device)
   }
   echo "         </select>";
 
+  if ( $port == 0 ) {
+    $selected = "selected=\"selected\"";
+  }
   echo "         <select name=\"switch_port\">";
+  echo "           <option value=\"\" $selected></option>";
   for ($i=0; $i<8; $i++) {
    $value = $i+1;
    $selected = "";
-   if ( $i == $port) {
+   if ( $i == $port && strlen($port) > 0) {
      $selected = "selected=\"selected\"";
    }
    echo "           <option value=\"$i\" $selected>$value</option>";
