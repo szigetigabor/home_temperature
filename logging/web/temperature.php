@@ -70,6 +70,16 @@ if (isset($_GET["filter"])) {
 
 // FORM END
 
+//GLBOAL MODE
+$global_mode = read_file($sensors_settings_path."/current_mode");
+$global_mode = trim($global_mode, " \n.");
+if ($global_mode == "") {
+    $global_mode="";
+}
+$global_disabled = "disabled=\"disabled\"";
+if ($global_mode == "Manual") {
+    $global_disabled = "";
+}
 
  
 //get all sensors files.
@@ -114,6 +124,7 @@ echo "       </form>";
      <th>device</th>
      <th>current value</th>
      <th>required <br>temperature</th>
+     <th>Mode</th>
      <th>switch</th>
      <th>heating <br>on/off</th>
   </tr>
@@ -164,6 +175,14 @@ foreach($devices as $device)
       $alarm=0;
   }
 
+  //MODE
+  $mode = read_file($settings_path."/mode");
+  $mode = trim($mode, " \n.");
+  if ($mode == "") {
+      $mode="";
+  }
+
+
   //SWITCH
   $switch = read_file($settings_path."/switch");
   $switch = trim($switch, " \n.");
@@ -189,16 +208,20 @@ foreach($devices as $device)
   }
   if ( $disabled == "" || substr($device_id, 0, 2) == "28" ){
       echo "  <td>";
-  echo "       <img src=\"\" width=\"1\" height=\"15\">";
-  echo "       <form method=\"post\">";
-//      echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $disabled>";
-      echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" >";
-      echo "      <input type=\"submit\" value=\"Set\">";
+      echo "       <img src=\"\" width=\"1\" height=\"15\">";
+      echo "       <form method=\"post\">";
+      echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $global_disabled>";
+//      echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" >";
+      echo "      <input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
       echo "</form>";
       echo "  </td>";
   } else {
       echo "     <td><input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $disabled></td>";
   }
+  if ($global_mode != ""){
+    $mode = $global_mode;
+  }
+  echo "     <td>$mode</td>";
   echo "     <td>$switch</td>";
   echo "     <td id=$onoff>$onoff</td>";
   echo "  </tr>";
