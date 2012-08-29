@@ -85,11 +85,30 @@ $time_values = array("0:30","1","1:30","2","2:30","3","3:30","4","4:30","5","5:3
 "18:30","19","19:30","20","20:30","21","21:30","22","22:30","23","23:30","24");
 
 $split_times = array("6:30", "12:30", "18:30");
-//get all mode files.
-$modes = glob($mode_settings_path . "*");
-
 
 include 'menu.php';
+
+if ($setting) {
+  echo "<table id=\"mode\">";
+  echo "<tr id=\"mode\">";
+  echo "<a href=\"add_mode.php\" class=\"buttonclass\">New mode</a>";
+
+  //print each mode settings
+  foreach($modes as $mode)
+  {
+    $mode_name = substr($mode, strrpos($mode, "/")+1);
+    $class="buttonclass";
+    if ( $get_mode == $mode_name ) {
+      $class = "active$class";
+    }
+    echo "<td id=\"mode\">";
+    echo "<a href=\"add_mode.php?mode=$mode_name\" class=\"$class\">$mode_name</a>";
+    echo "</td>";
+  }
+
+  echo"</tr>";
+  echo "</table>";
+}
 
   $mode_description = read_file($mode_settings_path."/$get_mode");
   $mode_values = explode("\n", $mode_description);
