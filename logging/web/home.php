@@ -1,35 +1,7 @@
 <?php
-//path to 1-wire sensors to scan
-$sensors_path = "/sys/bus/w1/devices/";
-
-//path to stored 1-wire sensors settings
-$sensors_settings_path = "/home/pi/logging";
-
-function read_file($path){
-    if (!file_exists($path)) {
-      return "";
-    }
-    $fn = fopen($path, "r");
-    $retval = fread($fn,filesize($path));
-    fclose($fn);
-    return $retval;
-}
-
-function write_file($path, $data){
-    $fn = fopen($path, 'w');
-    fwrite($fn, "$data\n");
-    fclose($fn);
-}
-
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
+include 'includes.php';
 include 'menu.php';
 
-
-$ip=$_SERVER['SERVER_ADDR'];
-//echo "<b>Server IP Address= $ip</b>";
- 
-$ip=$_SERVER['REMOTE_ADDR'];
-//echo "<p><b>Your IP Address= $ip</b>"; 
 
 //POST FORM START
 foreach($_POST as $key=>$value)
@@ -70,10 +42,6 @@ if ($global_mode == "Manual") {
 }
 
  
-//get all sensors files.
-$devices = glob($sensors_path . "*");
-
-
 echo "       <form method=\"get\">";
 echo "         <select name=\"filter\">";
 $selected = "";
@@ -113,8 +81,7 @@ echo "       </form>";
      <th>required <br>temperature</th>
 <?php
 
-$modes = array("Auto", "OFF");
-if (!in_array($global_mode, $modes)){
+if (!in_array($global_mode, $off_modes)){
   echo "     <th>Mode</th>";
 }
 ?>
@@ -202,7 +169,7 @@ foreach($devices as $device)
   } else {
       echo "     <td><input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $disabled></td>";
   }
-  if (!in_array($global_mode, $modes)){
+  if (!in_array($global_mode, $off_modes)){
     if ($global_mode != "" && $mode == ""){
       $mode = $global_mode;
     }

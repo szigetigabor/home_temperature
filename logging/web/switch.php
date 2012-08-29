@@ -1,31 +1,5 @@
 <?php
-//path to 1-wire sensors to scan
-$sensors_path = "/sys/bus/w1/devices/";
-
-//path to stored 1-wire sensors settings
-$sensors_settings_path = "/home/pi/logging";
-
-function read_file($path){
-    if (!file_exists($path)) {
-      return "";
-    }
-    $fn = fopen($path, "r");
-    $retval = fread($fn,filesize($path));
-    fclose($fn);
-    return $retval;
-}
-
-function write_file($path, $data, $mode){
-    $fn = fopen($path, $mode);
-    fwrite($fn, "$data\n");
-    fclose($fn);
-}
-
-$ip=$_SERVER['SERVER_ADDR'];
-//echo "Server IP Address= $ip";
- 
-$ip=$_SERVER['REMOTE_ADDR'];
-//echo "<br>Your IP Address= $ip"; 
+include 'includes.php';
 
 //POST FORM START
 if ( isset($_POST) ){
@@ -33,25 +7,19 @@ if ( isset($_POST) ){
   $file = $sensors_settings_path."/".$sensor_id."/switch";
   $mode = 'w';
   if ( isset($_POST["switch_name"]) && $_POST["switch_name"] == "" ) {
-    write_file($file,"",$mode);
+    write_file_extra($file,"",$mode);
   } else {
     foreach($_POST as $key=>$value)
     {
       if ( $key == "temp_sensor_id" ) {
         continue;
       }
-      write_file($file,$value,$mode);
+      write_file_extra($file,$value,$mode);
       $mode = 'a';
     }
   }
 }
 //FORM END
-
-
-//get all sensors files.
-$devices = glob($sensors_path . "*");
-
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
 
 include 'menu.php';
 ?>

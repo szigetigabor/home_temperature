@@ -1,31 +1,5 @@
 <?php
-//path to 1-wire sensors to scan
-$sensors_path = "/sys/bus/w1/devices/";
-
-//path to stored 1-wire sensors settings
-$sensors_settings_path = "/home/pi/logging";
-
-function read_file($path){
-    if (!file_exists($path)) {
-      return "";
-    }
-    $fn = fopen($path, "r");
-    $retval = fread($fn,filesize($path));
-    fclose($fn);
-    return $retval;
-}
-
-function write_file($path, $data){
-    $fn = fopen($path, 'w');
-    fwrite($fn, "$data\n");
-    fclose($fn);
-}
-
-$ip=$_SERVER['SERVER_ADDR'];
-//echo "Server IP Address= $ip";
- 
-$ip=$_SERVER['REMOTE_ADDR'];
-//echo "<br>Your IP Address= $ip"; 
+include 'includes.php';
 
 //POST FORM START
 foreach($_POST as $key=>$value)
@@ -35,11 +9,6 @@ foreach($_POST as $key=>$value)
 }
 //FORM END
 
-
-//get all sensors files.
-$devices = glob($sensors_path . "*");
-
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
 
 include 'menu.php';
 ?>

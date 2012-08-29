@@ -1,35 +1,6 @@
 <?php
-//path to 1-wire sensors to scan
-$sensors_path = "/sys/bus/w1/devices/";
-
-//path to stored 1-wire sensors settings
-$sensors_settings_path = "/home/pi/logging";
-
-function read_file($path){
-    if (!file_exists($path)) {
-      return "";
-    }
-    $fn = fopen($path, "r");
-    $retval = fread($fn,filesize($path));
-    fclose($fn);
-    return $retval;
-}
-
-function write_file($path, $data){
-    $fn = fopen($path, 'w');
-    fwrite($fn, "$data\n");
-    fclose($fn);
-}
-
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
+include 'includes.php';
 include 'menu.php';
-
-
-$ip=$_SERVER['SERVER_ADDR'];
-//echo "<b>Server IP Address= $ip</b>";
- 
-$ip=$_SERVER['REMOTE_ADDR'];
-//echo "<p><b>Your IP Address= $ip</b>"; 
 
 //POST FORM START
 $file_name="alarm";
@@ -88,20 +59,16 @@ if ($global_mode == "Manual") {
     $global_disabled = "";
 }
 
-//get all modes.
-$modes = glob($sensors_settings_path . "/modes/*");
+//get all mode's name.
 for($i=0; $i<sizeof($modes); $i++){
   $modes[$i] = substr($modes[$i], strrpos($modes[$i],"/")+1, strlen($modes[$i]));
 }
 
 function off_mode($var){
-  $off_modes = array("Auto", "Manual", "OFF");
-  return(!in_array($var, $off_modes));
+  global $off_modes_select;
+  return(!in_array($var, $off_modes_select));
 }
 $modes = array_filter($modes, "off_mode");
-
-//get all sensors files.
-$devices = glob($sensors_path . "*");
 
 
 echo "       <form method=\"get\">";
@@ -237,28 +204,26 @@ foreach($devices as $device)
       echo "     <td><input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $disabled></td>";
   }
 
-  $off_modes = array("Auto", "OFF");
   if (in_array($global_mode, $off_modes)){
-  //if ($global_mode != ""){
     $mode = $global_mode;
     echo "     <td><a href=\"add_mode.php?mode=$mode\">$mode</a>";
   } else {
-  echo "     <td><a href=\"add_mode.php?mode=$mode\">$mode</a>";
-  echo "        <form method=\"post\">";
-  echo "         <input type=\"hidden\" name =\"file\" value=\"mode\">";
-  echo "         <select name=\"$device_id\">";
-  echo "           <option value=\"\"></option>";
-  foreach($modes as &$mode_value){
-    $selected="";
-    if ($mode == $mode_value){
-      $selected="selected";
+    echo "     <td><a href=\"add_mode.php?mode=$mode\">$mode</a>";
+    echo "        <form method=\"post\">";
+    echo "         <input type=\"hidden\" name =\"file\" value=\"mode\">";
+    echo "         <select name=\"$device_id\">";
+    echo "           <option value=\"\"></option>";
+    foreach($modes as &$mode_value){
+      $selected="";
+      if ($mode == $mode_value){
+        $selected="selected";
+      }
+      echo "         <option value=\"$mode_value\" $selected>$mode_value</option>";
     }
-    echo "         <option value=\"$mode_value\" $selected>$mode_value</option>";
-  }
-  echo "         </select>";
-  echo "         <input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
-  echo "        </form>";
-  echo "     </td>";
+    echo "         </select>";
+    echo "         <input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
+    echo "        </form>";
+    echo "     </td>";
   }
   echo "     <td>$switch</td>";
   echo "     <td id=$onoff>$onoff</td>";
