@@ -1,6 +1,6 @@
 <div id='cssmenu'>
 <ul>
-   <li class='active '><a href='temperature.php'><span>Home</span></a></li>
+   <li class='active '><a href='home.php'><span>Home</span></a></li>
    <li class='has-sub '><a href='#'><span>Settings</span></a>
       <ul>
          <li><a href='temperature.php'><span>Temperature</span></a></li>

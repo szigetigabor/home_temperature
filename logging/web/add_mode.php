@@ -17,6 +17,50 @@ function write_file($path, $data, $mode){
     fclose($fn);
 }
 
+
+function temp_value($var,$time){
+    return(substr($var,0,5) == "temp_");
+}
+
+function temp_value_6_30($var){
+    $pos=strpos($var,"=");
+    if (substr($var,0,$pos) == "temp_6:30") {
+        return true;
+    }
+    return false;
+}
+
+function temp_value_12_30($var){
+    $pos=strpos($var,"=");
+    if (substr($var,0,$pos) == "temp_12:30") {
+        return true;
+    }
+    return false;
+}
+
+function temp_value_18_30($var){
+    $pos=strpos($var,"=");
+    if (substr($var,0,$pos) == "temp_18:30") {
+        return true;
+    }
+    return false;
+}
+
+function temp_value_24($var){
+    $pos=strpos($var,"=");
+    if (substr($var,0,$pos) == "temp_24") {
+        return true;
+    }
+    return false;
+}
+
+
+function mode_temp($values, $time){
+    $str= str_replace(":", "_", $time);
+    $temperature = array_slice(array_filter($values, "temp_value_$str"),0,1)[0];
+    $pos = strpos($temperature, "=");
+    return substr($temperature, $pos+1, strlen($temperature));
+}
 $ip=$_SERVER['SERVER_ADDR'];
 //echo "Server IP Address= $ip";
  

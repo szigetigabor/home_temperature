@@ -32,9 +32,16 @@ $ip=$_SERVER['REMOTE_ADDR'];
 //echo "<p><b>Your IP Address= $ip</b>"; 
 
 //POST FORM START
+$file_name="alarm";
+if (count($_POST) > 0 && isset($_POST["file"])){
+  $file_name=$_POST["file"];
+}
 foreach($_POST as $key=>$value)
 {
- $file = $sensors_settings_path."/".$key."/alarm";
+ if($key == "file"){
+   continue;
+ }
+ $file = $sensors_settings_path."/".$key."/$file_name";
  write_file($file,$value);
 
  // update the relays
@@ -81,7 +88,18 @@ if ($global_mode == "Manual") {
     $global_disabled = "";
 }
 
- 
+//get all modes.
+$modes = glob($sensors_settings_path . "/modes/*");
+for($i=0; $i<sizeof($modes); $i++){
+  $modes[$i] = substr($modes[$i], strrpos($modes[$i],"/")+1, strlen($modes[$i]));
+}
+
+function off_mode($var){
+  $off_modes = array("Auto", "Manual", "OFF");
+  return(!in_array($var, $off_modes));
+}
+$modes = array_filter($modes, "off_mode");
+
 //get all sensors files.
 $devices = glob($sensors_path . "*");
 
@@ -218,10 +236,30 @@ foreach($devices as $device)
   } else {
       echo "     <td><input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $disabled></td>";
   }
-  if ($global_mode != ""){
+
+  $off_modes = array("Auto", "OFF");
+  if (in_array($global_mode, $off_modes)){
+  //if ($global_mode != ""){
     $mode = $global_mode;
+    echo "     <td><a href=\"add_mode.php?mode=$mode\">$mode</a>";
+  } else {
+  echo "     <td><a href=\"add_mode.php?mode=$mode\">$mode</a>";
+  echo "        <form method=\"post\">";
+  echo "         <input type=\"hidden\" name =\"file\" value=\"mode\">";
+  echo "         <select name=\"$device_id\">";
+  echo "           <option value=\"\"></option>";
+  foreach($modes as &$mode_value){
+    $selected="";
+    if ($mode == $mode_value){
+      $selected="selected";
+    }
+    echo "         <option value=\"$mode_value\" $selected>$mode_value</option>";
   }
-  echo "     <td>$mode</td>";
+  echo "         </select>";
+  echo "         <input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
+  echo "        </form>";
+  echo "     </td>";
+  }
   echo "     <td>$switch</td>";
   echo "     <td id=$onoff>$onoff</td>";
   echo "  </tr>";

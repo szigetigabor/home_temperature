@@ -80,6 +80,33 @@ table#mode, tr#mode, td#mode
   border:0px;
   padding:0px;
   box-shadow: 0px 0px 0px #888888;
+
+  -moz-border-radius-bottomleft:0px;
+  -webkit-border-bottom-left-radius:0px;
+  border-bottom-left-radius:0px;
+
+  -moz-border-radius-bottomright:0px;
+  -webkit-border-bottom-right-radius:0px;
+  border-bottom-right-radius:0px;
+
+  -moz-border-radius-topright:0px;
+  -webkit-border-top-right-radius:0px;
+  border-top-right-radius:0px;
+
+  -moz-border-radius-topleft:0px;
+  -webkit-border-top-left-radius:0px;
+  border-top-left-radius:0px;
+
+}
+
+.rotate
+{
+     -moz-transform: rotate(-45deg);  /* FF3.5+ */
+      -o-transform: rotate(-45deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-45deg);  /* Saf3.1+, Chrome */
+             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-0.5);  /* IE6,IE7 */
+         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-0.5)"; /* IE8 */
+
 }
 
 /**************
