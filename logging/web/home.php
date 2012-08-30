@@ -2,7 +2,6 @@
 include 'includes.php';
 include 'menu.php';
 
-
 //POST FORM START
 foreach($_POST as $key=>$value)
 {
@@ -173,9 +172,23 @@ foreach($devices as $device)
     if ($global_mode != "" && $mode == ""){
       $mode = $global_mode;
     }
-    echo "     <td><a href=\"add_mode.php?mode=$mode\">$mode</a></td>";
+    echo "     <td><a href=\"add_mode.php?mode=$mode\" class=\"buttonclass\">$mode</a></td>";
   }
-  echo "     <td id=$onoff>$onoff</td>";
+  echo "     <td id=$onoff>";
+  $checked="";
+  if ($onoff=="on"){
+    $checked="checked";
+  }
+  echo "<div class=\"roundedOne\">";
+  echo "  <input type=\"checkbox\" value=\"None\" id=\"roundedOne\" name=\"check\" $checked/>";
+  echo "  <label for=\"roundedOne\"></label>";
+  echo "</div>";
+
+  echo "<div class=\"slideThree\">";
+  echo "  <input type=\"checkbox\" value=\"None\" id=\"slideThree\" name=\"check\" $checked/>";
+  echo "  <label for=\"slideThree\"></label>";
+  echo "</div>";
+
   echo "  </tr>";
   echo "  </tbody>";
 }
