@@ -1,46 +1,22 @@
 <?php
 include 'includes.php';
 
-function temp_value($var,$time){
-    return(substr($var,0,5) == "temp_");
-}
+$time_stamp="";
 
-function temp_value_6_30($var){
+function temp_value($var){
+    global $time_stamp;
     $pos=strpos($var,"=");
-    if (substr($var,0,$pos) == "temp_6:30") {
+    if (substr($var,0,$pos) == "temp_$time_stamp") {
         return true;
     }
     return false;
 }
-
-function temp_value_12_30($var){
-    $pos=strpos($var,"=");
-    if (substr($var,0,$pos) == "temp_12:30") {
-        return true;
-    }
-    return false;
-}
-
-function temp_value_18_30($var){
-    $pos=strpos($var,"=");
-    if (substr($var,0,$pos) == "temp_18:30") {
-        return true;
-    }
-    return false;
-}
-
-function temp_value_24($var){
-    $pos=strpos($var,"=");
-    if (substr($var,0,$pos) == "temp_24") {
-        return true;
-    }
-    return false;
-}
-
 
 function mode_temp($values, $time){
-    $str= str_replace(":", "_", $time);
-    $temperature = array_slice(array_filter($values, "temp_value_$str"),0,1)[0];
+    global $time_stamp;
+    $time_stamp=$time;
+    //$str= str_replace(":", "_", $time);
+    $temperature = array_slice(array_filter($values, "temp_value"),0,1)[0];
     $pos = strpos($temperature, "=");
     return substr($temperature, $pos+1, strlen($temperature));
 }
