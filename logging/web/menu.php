@@ -4,9 +4,20 @@
    <li class='has-sub '><a href='#'><span>Settings</span></a>
       <ul>
          <li><a href='temperature.php'><span>Temperature</span></a></li>
-         <li><a href='alias.php'><span>Alias</span></a></li>
-         <li><a href='switch.php'><span>Switch</span></a></li>
+         <li><a href='mode.php'><span>Mode</span></a></li>
       </ul>
+   </li>
+   <li class='has-sub '><a href='#'><span>Admin</span></a>
+   <ul>
+      <li><a href='alias.php'><span>Alias</span></a></li>
+      <li class='has-sub '><a href='#'><span>Mode</span></a>
+         <ul>
+            <li><a href='add_mode.php'><span>Add Mode</span></a></li>
+            <li><a href='mode.php'><span>Mode</span></a></li>
+         </ul>
+      </li>
+      <li><a href='switch.php'><span>Switch</span></a></li>
+   </ul>
    </li>
    <li><a href='#'><span>About</span></a></li>
    <li><a href='#'><span>Contact</span></a></li>

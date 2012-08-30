@@ -42,5 +42,7 @@ echo "</table>";
 ?>
 
 <p><a href="add_mode.php" class="buttonclass">Add new mode</a>
-<a href="add_mode.php" class="buttonclass">Set modes</a>
+<?php
+echo "<a href=\"add_mode.php?mode=$current_mode\" class=\"buttonclass\">Set modes</a>";
+?>
 

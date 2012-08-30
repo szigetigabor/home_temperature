@@ -21,25 +21,39 @@ function mode_temp($values, $time){
     return substr($temperature, $pos+1, strlen($temperature));
 }
 
+$time_schedule="";
 //POST FORM START
 if ( isset($_POST) && count($_POST) > 0 ){
-  $mode_name=$_POST["mode_name"];
-  if ( !file_exists($mode_settings_path."/") ) {
-    mkdir($mode_settings_path, 0777);
-  }
-  $file = $mode_settings_path."/$mode_name";
-  $mode = 'w';
-  foreach($_POST as $key=>$value)
-  {
-   if ( $key == "mode_name" ) {
-     continue;
-   }
-   if ( substr($key,0,5) == "temp_") {
-     write_file_extra($file,"$key=$value",$mode);
-   } else {
-     write_file_extra($file,$key,$mode);
-   }
-   $mode = 'a';
+  if ($_POST["post_time_schedule"] != "") {
+    $time_schedule = $_POST["post_time_schedule"];
+
+   // $read_times = read_file($time_settings_path."/$time_schedule");
+   // $split_times= explode("\n", $read_times);
+  } else {
+    $mode_name=$_POST["mode_name"];
+    if ( !file_exists($mode_settings_path."/") ) {
+      mkdir($mode_settings_path, 0777);
+    }
+    $file = $mode_settings_path."/$mode_name";
+    $mode = 'w';
+    foreach($_POST as $key=>$value)
+    {
+      if ( $key == "time_schedule" ) {
+        $time_schedule=$value;
+        write_file_extra($file,$value,$mode);
+        $mode='a';
+        continue;
+      }
+      if ( $key == "mode_name" ) {
+        continue;
+      }
+      if ( substr($key,0,5) == "temp_") {
+        write_file_extra($file,"$key=$value",$mode);
+      } else {
+        write_file_extra($file,$key,$mode);
+      }
+      $mode = 'a';
+    }
   }
 }
 //FORM END
@@ -53,14 +67,8 @@ if (isset($_GET["mode"])) {
    $setting=true;
 }
 
+
 //FORM END
-
-$time_values = array("0:30","1","1:30","2","2:30","3","3:30","4","4:30","5","5:30","6",
-"6:30","7","7:30","8","8:30","9","9:30","10","10:30","11","11:30","12",
-"12:30","13","13:30","14","14:30","15","15:30","16","16:30","17","17:30","18",
-"18:30","19","19:30","20","20:30","21","21:30","22","22:30","23","23:30","24");
-
-$split_times = array("6:30", "12:30", "18:30");
 
 include 'menu.php';
 
@@ -86,10 +94,58 @@ if ($setting) {
   echo "</table>";
 }
 
-  $mode_description = read_file($mode_settings_path."/$get_mode");
+
+$mode_description = read_file($mode_settings_path."/$get_mode");
+$mode_values = explode("\n", $mode_description);
+if ($time_schedule == ""){
+  $time_schedule= $mode_values[0];
+}
+if ($time_schedule != ""){
+  $read_times = read_file($time_settings_path."/$time_schedule");
+  if ($read_times != ""){
+    $split_times= explode("\n", $read_times);
+  }
+}
+
+
+
+
+echo " <form method=\"post\">";
+echo "  Time schedule mode: <select name=\"post_time_schedule\">";
+echo "     <option value=\"default\" $selected></option>";
+//put each schedule time setting's name
+foreach($times as $time)
+{
+  $time_name = substr($time, strrpos($time, "/")+1);
+
+  $selected = "";
+  if ($time_name == $time_schedule) {
+    $selected = "selected=\"selected\"";
+  }
+
+  echo "     <option value=\"$time_name\" $selected>$time_name</option>";
+
+}
+echo "   </select>";
+echo "   <input type=\"submit\" value=\"Select\">";
+echo " </form>";
+
+
+/*  $mode_description = read_file($mode_settings_path."/$get_mode");
   $mode_values = explode("\n", $mode_description);
+if ($time_schedule == ""){
+  $time_schedule= $mode_values[0];
+}
+if ($time_schedule != ""){
+  $read_times = read_file($time_settings_path."/$time_schedule");
+  if ($read_times != ""){
+    $split_times= explode("\n", $read_times);
+  }
+}*/
+
   echo "       <form method=\"post\">";
-  echo "         name: <input type=\"text\" name=\"mode_name\" value=\"$get_mode\">";
+  echo "         <input type=\"hidden\" name=\"time_schedule\" value=\"$time_schedule\">";
+  echo "         Mode name: <input type=\"text\" name=\"mode_name\" value=\"$get_mode\">";
   echo "         <table id=\"mode\">";
   echo "           <tr id=\"mode\">";
   $title_lines= array();

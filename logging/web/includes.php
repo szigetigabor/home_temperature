@@ -13,8 +13,15 @@ $sensors_settings_path = "/home/pi/logging";
 //path to the modes settings
 $mode_settings_path = "/home/pi/logging/modes";
 
-//get all sensors files.
+//get all modes files.
 $modes = glob($mode_settings_path . "/*");
+
+
+//path to the switch time schedule settings
+$time_settings_path = "/home/pi/logging/times";
+
+//get all switch time schedules files.
+$times = glob($time_settings_path . "/*");
 
 
 function read_file($path){
@@ -50,4 +57,14 @@ $ip=$_SERVER['REMOTE_ADDR'];
 
 $off_modes = array("Auto", "OFF");
 $off_modes_select = array("Auto", "Manual", "OFF");
+
+
+$time_values = array("0:30","1","1:30","2","2:30","3","3:30","4","4:30","5","5:30","6",
+"6:30","7","7:30","8","8:30","9","9:30","10","10:30","11","11:30","12",
+"12:30","13","13:30","14","14:30","15","15:30","16","16:30","17","17:30","18",
+"18:30","19","19:30","20","20:30","21","21:30","22","22:30","23","23:30","24");
+
+$split_times = array("6:30", "12:30", "18:30");
+
+
 ?>
