@@ -70,15 +70,14 @@ echo "         </select>";
 echo "         <input type=\"submit\" value=\"Filter\">";
 echo "       </form>";
 
-?>
-<center>
-<table>
-  <thead>
-  <tr>
-     <th>device</th>
-     <th>current value</th>
-     <th>required <br>temperature</th>
-<?php
+echo "<center>";
+echo "<table>";
+echo "  <thead>";
+echo "  <tr>";
+
+echo "     <th>$lang[1]</th>";
+echo "     <th>current value</th>";
+echo "     <th>required <br>temperature</th>";
 
 if (!in_array($global_mode, $off_modes)){
   echo "     <th>Mode</th>";
