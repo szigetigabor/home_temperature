@@ -179,12 +179,12 @@ foreach($devices as $device)
     $checked="checked";
   }
   echo "<div class=\"roundedOne\">";
-  echo "  <input type=\"checkbox\" value=\"None\" id=\"roundedOne\" name=\"check\" $checked/>";
+  echo "  <input type=\"checkbox\" value=\"None\" id=\"roundedOne\" name=\"check\" $checked disabled/>";
   echo "  <label for=\"roundedOne\"></label>";
   echo "</div>";
 
   echo "<div class=\"slideThree\">";
-  echo "  <input type=\"checkbox\" value=\"None\" id=\"slideThree\" name=\"check\" $checked/>";
+  echo "  <input type=\"checkbox\" value=\"None\" id=\"slideThree\" name=\"check\" $checked/ disabled>";
   echo "  <label for=\"slideThree\"></label>";
   echo "</div>";
 
