@@ -10,10 +10,10 @@
    <li class='has-sub '><a href='#'><span>Admin</span></a>
    <ul>
       <li><a href='alias.php'><span>Alias</span></a></li>
-      <li class='has-sub '><a href='#'><span>Mode</span></a>
+      <li class='has-sub '><a href='#'><span>Mode<div id="menu_arrow">></div></span></a>
          <ul>
             <li><a href='add_mode.php'><span>Add Mode</span></a></li>
-            <li><a href='mode.php'><span>Mode</span></a></li>
+            <li><a href='add_mode.php?mode'><span>Set Mode</span></a></li>
          </ul>
       </li>
       <li><a href='switch.php'><span>Switch</span></a></li>
