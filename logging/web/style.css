@@ -214,7 +214,8 @@ td#menu_switch
 /**************
  *  Checkbox  *
  **************/
-input[type=checkbox] {
+.slideThree input[type=checkbox],
+.rounded One input[type=checkbox] {
 	visibility: hidden;
 }
 /* SLIDE THREE */
@@ -378,3 +379,97 @@ input[type=checkbox] {
 	filter: alpha(opacity=100);
 	opacity: 1;
 }
+
+/* LANGS */
+.langs input[type=radio] {
+	visibility: hidden;
+}
+
+.langs {
+        width: 60px;
+	height: 45px;
+	background: #fcfff4;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+
+	-webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+        position: relative;
+}
+
+.langs img {
+        cursor: pointer;
+        width: 48px;
+        height: 31px;
+        top:4px;
+        left:4px;
+        position: absolute;
+        z-index:1;
+}
+
+.langs label {
+	cursor: pointer;
+	position: absolute;
+	width: 56px;
+	height: 39px;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	left: 2px;
+	top: 4px;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+}
+
+.langs label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 56px;
+	height: 39px;
+	background: #00bf00;
+
+	background: -webkit-linear-gradient(top, #ff0000 0%, #b60000 100%);
+	background: -moz-linear-gradient(top, #ff0000 0%, #b60000 100%);
+	background: -o-linear-gradient(top, #ff0000 0%, #b60000 100%);
+	background: -ms-linear-gradient(top, #ff0000 0%, #b60000 100%);
+	background: linear-gradient(top, #ff0000 0%, #b60000 100%);
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	top: 0px;
+	left: 0px;
+
+	-webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+}
+
+.langs label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+	filter: alpha(opacity=20);
+	opacity: 0.2;
+}
+
+.langs input[type=radio]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
