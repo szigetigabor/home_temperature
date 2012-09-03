@@ -78,6 +78,7 @@ if ($setting) {
   echo "<a href=\"add_mode.php\" class=\"buttonclass\">New mode</a>";
 
   //print each mode settings
+  $i=0;
   foreach($modes as $mode)
   {
     $mode_name = substr($mode, strrpos($mode, "/")+1);
@@ -88,6 +89,10 @@ if ($setting) {
     echo "<td id=\"mode\">";
     echo "<a href=\"add_mode.php?mode=$mode_name\" class=\"$class\">$mode_name</a>";
     echo "</td>";
+    $i++;
+    if ($i%7 == 0){
+      echo "</tr><tr id=\"mode\">";
+    }
   }
 
   echo"</tr>";
