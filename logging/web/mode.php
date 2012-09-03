@@ -19,6 +19,7 @@ echo "<table id=\"mode\">";
 echo "<tr id=\"mode\">";
 
 //print each mode settings
+$i=0;
 foreach($modes as $mode)
 {
   $mode_name = substr($mode, strrpos($mode, "/")+1);
@@ -35,6 +36,11 @@ foreach($modes as $mode)
   echo "         <input type=\"submit\" value=\"$mode_name\" class=\"$class\" $disable >";
   echo "       </form>";
   echo "</td>";
+  $i++;
+  if ($i%7 == 0){
+    echo "</tr><tr id=\"mode\">";
+  }
+
 }
 
 echo"</tr>";
