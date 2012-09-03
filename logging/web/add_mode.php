@@ -64,10 +64,13 @@ $get_mode="";
 $setting=false;
 if (isset($_GET["mode"])) {
    $get_mode=$_GET["mode"];
+   if ($get_mode == "") {
+     $file = $sensors_settings_path."/current_mode";
+     $get_mode = read_file($file);
+     $get_mode = trim($get_mode, " \n.");
+   }
    $setting=true;
 }
-
-
 //FORM END
 
 include 'menu.php';
