@@ -1,6 +1,15 @@
 <?php
 include 'includes.php';
 
+function alert($msg)
+{
+   echo "\n<script language=\"javascript\">";
+   echo "\nalert(\"$msg\");";
+   echo "\nhistory.back();";
+   echo "\n</script>";
+}
+
+
 $time_stamp="";
 
 function temp_value($var){
@@ -31,6 +40,9 @@ if ( isset($_POST) && count($_POST) > 0 ){
    // $split_times= explode("\n", $read_times);
   } else {
     $mode_name=$_POST["mode_name"];
+    if ($mode_name == "" ) {
+      alert("Empty mode name! Please set it.");
+    }
     if ( !file_exists($mode_settings_path."/") ) {
       mkdir($mode_settings_path, 0777);
     }
@@ -54,6 +66,8 @@ if ( isset($_POST) && count($_POST) > 0 ){
       }
       $mode = 'a';
     }
+    // reread modes
+    $modes = glob($mode_settings_path . "/*");
   }
 }
 //FORM END
