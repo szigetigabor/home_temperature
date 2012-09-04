@@ -200,6 +200,7 @@ td#menu_switch
   padding: 0;
   width: 145px;
   position: absolute;
+  z-index: 1;
   top: 40px;
   left: 0;
   background: #ddd url(overlay.png) repeat-x 0 0;

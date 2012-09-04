@@ -15,6 +15,7 @@
          <ul>
             <li><a href='add_mode.php'><span>Add Mode</span></a></li>
             <li><a href='add_mode.php?mode'><span>Set Mode</span></a></li>
+            <li><a href='delete_mode.php'><span>Delete Mode</span></a></li>
          </ul>
       </li>
       <li><a href='switch.php'><span>Switch</span></a></li>
