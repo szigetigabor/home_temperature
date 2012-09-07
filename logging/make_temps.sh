@@ -1,11 +1,11 @@
 #!/bin/bash
 # Read temperature from sensors
-sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
+sensors=`cat /sys/bus/w1/devices/w1\ bus\ master/w1_master_slaves;`
 
 for line in $sensors
 do
   sudo mkdir /var/www/temp_graphs/$line
-  rrdtool create temperature5004_$line.rrd --start N --step 300 \
+  rrdtool create temperature5004_$line.rrd --start N --step 60 \
   DS:temp:GAUGE:600:U:U \
   RRA:AVERAGE:0.5:1:12 \
   RRA:AVERAGE:0.5:1:288 \
