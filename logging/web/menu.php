@@ -18,7 +18,12 @@
             <li><a href='delete_mode.php'><span>Delete Mode</span></a></li>
          </ul>
       </li>
-      <li><a href='switch.php'><span>Switch</span></a></li>
+      <li class='has-sub '><a href='#'><span>Switch<div id="menu_arrow">></div></span></a>
+        <ul>
+          <li><a href='switch.php'><span>Temperature mapping</span></a></li>
+          <li><a href='switch_status.php'><span>Swithc status</span></a></li>
+        </ul>
+      </li>
    </ul>
    </li>
    <li><a href='#'><span>About</span></a></li>

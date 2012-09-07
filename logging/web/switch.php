@@ -35,6 +35,8 @@ include 'menu.php';
   </thead>
 
 <?php
+$switch_ids = glob($sensors_path . "29-*");
+
 //print each sensor device
 foreach($devices as $device)
 {
@@ -57,16 +59,21 @@ foreach($devices as $device)
   echo "         <input type=\"hidden\" name=\"temp_sensor_id\" value=\"$device_name\" >";
   echo "         <select name=\"switch_name\">";
   echo "           <option value=\"\" $selected></option>";
-  //TODO: read switch ids
-  $switch_ids = array("swid1", "swid2");
-  $value = 1;
-  foreach( $switch_ids as &$id ){
-   $selected = "";
-   if ($id == $switch_id) {
-     $selected = "selected=\"selected\"";
-   }
-   echo "           <option value=\"$id\" $selected>sw$value</option>";
-   $value += 1;
+
+  foreach( $switch_ids as $id ){
+    $id=substr($id, strrpos($id, "/")+1);
+    $selected = "";
+    if ($id == $switch_id) {
+      $selected = "selected=\"selected\"";
+    }
+    // ALIAS
+    $alias = read_file($sensors_settings_path."/".$id."/alias");
+    $alias = trim($alias, " \n.");
+    if ( $alias != "") {
+      echo "           <option value=\"$id\" $selected>$alias</option>";
+    } else {
+      echo "           <option value=\"$id\" $selected>$id</option>";
+    }
   }
   echo "         </select>";
 

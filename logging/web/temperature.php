@@ -89,7 +89,7 @@ if ($get_filter == "-") {
   $selected = "selected=\"selected\"";
 }
 
-echo "           <option value=\"-\" $selected>Switch</option>";
+echo "           <option value=\"29-\" $selected>Switch</option>";
 $selected = "";
 if ($get_filter == "w1_") {
   $selected = "selected=\"selected\"";
