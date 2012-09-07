@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# load: "rm -f raspbian-w1-update ; wget http://www.frank-buss.de/raspberrypi/raspbian-w1-update"
+# start as root: "bash raspbian-w1-update"
+
+cd /boot
+rm -f kernel-raspbian-w1.gz kernel-raspbian-w1
+wget http://www.frank-buss.de/raspberrypi/kernel-raspbian-w1.gz
+gzip -d kernel-raspbian-w1.gz
+mv kernel-raspbian-w1 kernel.img
+cd /lib/modules
+rm -f modules-raspbian-w1.tgz
+rm -rf 3.1.9+.old
+wget http://www.frank-buss.de/raspberrypi/modules-raspbian-w1.tgz
+mv 3.1.9+ 3.1.9+.old
+tar -xzvf modules-raspbian-w1.tgz
+rm -f modules-raspbian-w1.tgz
+sync
+reboot

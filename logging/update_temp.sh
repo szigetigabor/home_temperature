@@ -2,15 +2,18 @@
 cd /home/pi/logging
 
 # Read temperature from sensors
-sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
+sensors=`cat /sys/bus/w1/devices/w1\ bus\ master/w1_master_slaves;`
 
 for line in $sensors
 do
+   if [ `echo $line|cut -c1-3` != "28-" ]; then
+      continue
+   fi
    if [ ! -d $line ]; then
       mkdir $line
       chmod 777 $line
    fi
-  tempread=`cat /sys/bus/w1/devices/w1_bus_master1/$line/w1_slave|tail -1|cut -d"=" -f2;`  
+  tempread=`cat /sys/bus/w1/devices/$line/w1_slave|tail -1|cut -d"=" -f2;`  
   # update store values
   echo $tempread > $line/value;
 

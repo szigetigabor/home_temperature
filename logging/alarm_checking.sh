@@ -3,7 +3,7 @@
 sensor_settings_path="/home/pi/logging"
 
 # Read temperature from sensors
-sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
+sensors=`cat /sys/bus/w1/devices/w1\ bus\ master/w1_master_slaves;`
 
 for line in $sensors
 do
@@ -48,14 +48,18 @@ do
         alarm+=000
       fi
 
-      #echo $temp
-      #echo $alarm
+      #alias=`cat $sensor_settings_path/$line/alias;`
+      #switch=`cat $sensor_settings_path/$line/switch;`
+
+      heating_mode=""; 
       if [ $temp -lt $alarm ]; then
-        echo "$line: heating ON";
-        echo on > $sensor_settings_path/$line/onoff
+        heating_mode="on";
       else
-        echo "$line: heating OFF";
-        echo off > $sensor_settings_path/$line/onoff
+        heating_mode="off";
       fi
+
+      echo "$line: heating " `echo $heating_mode | tr '[:lower:]' '[:upper:]'`;
+      echo $heating_mode > $sensor_settings_path/$line/onoff
+      
   fi
 done
