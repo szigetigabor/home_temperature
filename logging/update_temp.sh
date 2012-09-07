@@ -13,15 +13,21 @@ do
       mkdir $line
       chmod 777 $line
    fi
-  tempread=`cat /sys/bus/w1/devices/$line/w1_slave|tail -1|cut -d"=" -f2;`  
-  # update store values
-  echo $tempread > $line/value;
 
-  l=`expr length $tempread`
-  #up=`echo $tempread|cut -c1-$(($l-3));`
-  up=`echo $(($tempread/1000));`
-  down=`echo $tempread|cut -c $(($l-2))-;`
-  temp=$up.$down
+  crc="NO" 
+
+  while [ $crc = "NO" ]
+  do
+    sensor_output=$(cat /sys/bus/w1/devices/$line/w1_slave | cut -c 30-)
+    crc=$(echo $sensor_output | cut -c 7-10 )
+    #echo $crc
+  done
+  temp_raw=$(echo $sensor_output | cut -c 11-)
+  temp=$(echo "0.001 * $temp_raw" | bc)
+  
+  # update store values
+  echo $temp_raw > $line/value;
+
 
   # Update database
   rrdtool update temperature5004_$line.rrd N:$temp
