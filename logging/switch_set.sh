@@ -47,6 +47,11 @@ status_bin=$prefix$status_bin
 
 #echo $status_bin
 
+if [ ${status_bin:${port}:1} -eq $value ]; then
+  echo "Current status is same as the new. Nothing to do."
+  exit 0
+fi
+
 #######################
 #  set the new value  #
 #######################
