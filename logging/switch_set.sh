@@ -22,7 +22,6 @@ if [ $port -lt 1 ] || [ $port -gt 8 ]; then
   exit 1
 fi
 
-
 if [ $value -ne "0" ] && [ $value -ne "1" ]; then
   echo "Wrong value! [0,1]"
   value=0
@@ -34,8 +33,10 @@ switch_output="/sys/bus/w1/devices/$device_id/output"
 #  read the current switch status  #
 ####################################
 status=`dd if=$switch_output bs=1 count=1|hexdump|head -1`
-status=${status:10:2};
+status=${status:10:2}
+status=`echo "${status^^}"`
 
+# convert hexa to binary
 status_bin=`echo "obase=2; ibase=16; $status" | bc`
 
 prefix=""
@@ -46,8 +47,9 @@ done
 status_bin=$prefix$status_bin
 
 #echo $status_bin
-
-if [ ${status_bin:${port}:1} -eq $value ]; then
+Pport=0
+let "Pport=$port-1"
+if [ ${status_bin:${Pport}:1} -eq $value ]; then
   echo "Current status is same as the new. Nothing to do."
   exit 0
 fi
@@ -58,26 +60,13 @@ fi
 next_value_bin=$status_bin
 next_value_bin=`echo $next_value_bin | sed s/./$value/$port`
 
-#echo $next_value_bin
+# change the port's value
+echo $next_value_bin | sed s/./$value/$port
+# convert binary to hexa
+next_value=`echo "obase=16; ibase=2; $next_value_bin" | bc`
 
-next_value=`echo "obase=10; ibase=2; $next_value_bin" | bc`
-#echo $next_value
-
-# POSIX
-# chr() - converts decimal value to its ASCII character representation
-# ord() - converts ASCII character to its decimal value
-
-chr() {
-  [ ${1} -lt 256 ] || return 1
-  printf \\$(printf '%03o' $1)
-}
-
-ord() {
-  LC_CTYPE=C printf '%d' "'$1"
-}
-
-next_value=`chr $next_value`
-echo `echo \$next_value` |dd of=$switch_output bs=1 count=1
+# write to the switch
+echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1
 
 #dd if=$switch_output bs=1 count=1|hexdump
 
