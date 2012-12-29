@@ -66,8 +66,14 @@ echo $next_value_bin | sed s/./$value/$port
 next_value=`echo "obase=16; ibase=2; $next_value_bin" | bc`
 
 control_status="N/A"
-while [ "$control_status" != "$next_value" ]; do
-    echo "write: $next_value"
+Nnext_value=$next_value
+# This string manipulation need for the while condition
+if [ ${#next_value} -eq 1 ]; then
+    Nnext_value="0"$next_value
+fi
+
+while [ "$control_status" != "$Nnext_value" ]; do
+    echo "write: $Nnext_value"
     # write to the switch
     echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1
 
