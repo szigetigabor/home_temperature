@@ -84,3 +84,11 @@ while [ "$control_status" != "$Nnext_value" ]; do
     echo "read: $control_status"
     sleep 1
 done
+
+# Turn ON/OFF the main pump
+if [ "$next_value" == "0" ]
+then
+    echo "Pump turn OFF."
+else
+    echo "Pump turn ON."
+fi
