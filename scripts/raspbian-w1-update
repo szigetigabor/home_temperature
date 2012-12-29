@@ -16,4 +16,9 @@ mv 3.1.9+ 3.1.9+.old
 tar -xzvf modules-raspbian-w1.tgz
 rm -f modules-raspbian-w1.tgz
 sync
+
+echo w1_gpio >> /etc/modules
+echo w1_ds2408 >> /etc/modules
+echo w1_therm >> /etc/modules
+
 reboot
