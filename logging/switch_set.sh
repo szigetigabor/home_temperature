@@ -65,8 +65,16 @@ echo $next_value_bin | sed s/./$value/$port
 # convert binary to hexa
 next_value=`echo "obase=16; ibase=2; $next_value_bin" | bc`
 
-# write to the switch
-echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1
+control_status="N/A"
+while [ "$control_status" != "$next_value" ]; do
+    echo "write: $next_value"
+    # write to the switch
+    echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1
 
-#dd if=$switch_output bs=1 count=1|hexdump
-
+    # read back the new status
+    control_status=`dd if=$switch_output bs=1 count=1|hexdump|head -1`
+    control_status=${control_status:10:2}
+    control_status=`echo "${control_status^^}"`
+    echo "read: $control_status"
+    sleep 1
+done
