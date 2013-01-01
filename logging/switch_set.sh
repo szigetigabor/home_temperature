@@ -41,7 +41,7 @@ fi
 ####################################
 read_status() {
     # 1st parameter: path of the output's file
-    status=`dd if=$1 bs=1 count=1|hexdump|head -1`
+    status=`dd if=$1 bs=1 count=1 2>>/dev/null|hexdump|head -1`
     status=${status:10:2}
     status=`echo "${status^^}"`
 
@@ -96,7 +96,7 @@ fi
 while [ "$control_status" != "$Nnext_value" ]; do
     echo "write: $Nnext_value"
     # write to the switch
-    echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1
+    echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1 2>>/dev/null
 
     # read back the new status
     control_status=`read_status $switch_output`
