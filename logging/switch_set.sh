@@ -21,6 +21,7 @@ if [ $port -lt 1 ] || [ $port -gt 8 ]; then
   echo "Wrong port value! [1,...,8]"
   exit 1
 fi
+let "port= 9-$port"
 
 if [ $value -ne "0" ] && [ $value -ne "1" ]; then
   echo "Wrong value! [0,1]"
