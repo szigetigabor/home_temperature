@@ -28,6 +28,13 @@ if [ $value -ne "0" ] && [ $value -ne "1" ]; then
   value=0
 fi
 
+# Change the status value because it works onotjer on the relay board
+if [ $value -eq "0" ]; then
+  value=1
+else
+  value=0
+fi
+
 switch_output="/sys/bus/w1/devices/$device_id/output"
 
 if [ -w $switch_output ]; then
@@ -106,7 +113,7 @@ while [ "$control_status" != "$Nnext_value" ]; do
 done
 
 # Turn ON/OFF the main pump
-if [ "$next_value" == "0" ]
+if [ "$next_value" == "FF" ]
 then
     echo "Pump turn OFF."
 else
