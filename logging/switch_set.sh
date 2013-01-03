@@ -28,7 +28,7 @@ if [ $value -ne "0" ] && [ $value -ne "1" ]; then
   value=0
 fi
 
-# Change the status value because it works onotjer on the relay board
+# Change the status value because it works another on the relay board
 if [ $value -eq "0" ]; then
   value=1
 else

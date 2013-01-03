@@ -42,3 +42,5 @@ do
   sleep 1
 done
 
+./alarm_checking.sh
+

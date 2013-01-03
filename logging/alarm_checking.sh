@@ -49,13 +49,18 @@ do
       fi
 
       #alias=`cat $sensor_settings_path/$line/alias;`
-      #switch=`cat $sensor_settings_path/$line/switch;`
+      switch=`cat $sensor_settings_path/$line/switch;`
 
+      deviceID=${switch:0:15}
+      port=${switch:16:1}
+      let "port=port+1"
       heating_mode=""; 
       if [ $temp -lt $alarm ]; then
         heating_mode="on";
+        ./switch_set.sh $deviceID $port 1
       else
         heating_mode="off";
+        ./switch_set.sh $deviceID $port 0
       fi
 
       echo "$line: heating " `echo $heating_mode | tr '[:lower:]' '[:upper:]'`;
