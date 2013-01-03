@@ -212,7 +212,7 @@ td#menu_switch
   -moz-box-shadow: 0 1px 3px rgba(0,0,0, .3);
   box-shadow: 0 1px 3px rgba(0,0,0, .3);
 }
-#cssmenu ul ul ul {top: 0;  left: 146px;}
+#cssmenu ul ul ul {top: 0;  left: 126px;}
 div#menu_arrow {float:right}
 #cssmenu ul ul li {float: none; margin: 0; padding: 3px; }
 #cssmenu ul ul a {font-weight: normal; text-shadow: 0 1px 0 #fff; }
@@ -327,7 +327,7 @@ div#menu_arrow {float:right}
 	font-weight: bold;
 }
 
-.slideThree label {
+.slideThree label,.slideThree input[type=submit] {
 	display: block;
 	width: 34px;
 	height: 20px;
@@ -362,6 +362,10 @@ div#menu_arrow {float:right}
 
 .slideThree input[type=checkbox]:checked + label {
 	left: 43px;
+}
+
+.slideThree input[type=checkbox]:checked + input[type=submit] {
+        left: 43px;
 }
 
 /* ROUNDED ONE */
@@ -544,3 +548,11 @@ div#menu_arrow {float:right}
 	opacity: 0.5;
 }
 
+
+/**************
+ *   Others   *
+ **************/
+img.graph {
+    height:75%;
+    width:75%;
+}

@@ -9,6 +9,28 @@ if (isset($_GET["filter"])) {
 }
 // FORM END
 
+//POST FORM START
+if (count($_POST) >= 3){
+  $device=$_POST["device"];
+  $port=intval($_POST["port"])+1;
+  $new_state=$_POST["old_state"];
+
+  if ($new_state == "on" || empty($new_state)) {
+    $new_state=0;
+  }elseif ($new_state == "off") {
+    $new_state=1;
+  }
+
+ #$file = $sensors_settings_path."/".$key."/$file_name";
+ #write_file($file,$value);
+
+ # update the relays
+ $command = "$sensors_settings_path/switch_set.sh $device $port $new_state";
+ exec ($command, $output);
+
+}
+//FORM END
+
 
 
 $used_switches = array();
@@ -82,6 +104,10 @@ echo "  <tbody>";
 foreach($switches as $switch_id)
 {
   $switch_id_name=substr($switch_id, strrpos($switch_id, "/")+1);
+
+  $read_command="$sensors_settings_path/switch_read.sh $switch_id_name";
+  exec ($read_command, $switch_output);
+
   if ( $get_filter != "" && $get_filter != $switch_id_name ) {
     continue;
   }
@@ -108,16 +134,33 @@ foreach($switches as $switch_id)
       // ON/OFF
       $onoff = read_file($sensors_settings_path."/".$who_use_it."/onoff");
       $onoff = trim($onoff, " \n.");
+
       if ($onoff == "on"){      
         $checked="checked";
       }
+    } else {
+      $onoff= substr($switch_output[0],7-$i,1);
+      if ($onoff == "0"){
+        $onoff="on";
+        $checked="checked";
+      }
+      if ($onoff == "1"){
+        $onoff="off";
+      }
     }
     echo "  <td>";
+    echo "    <form method=\"post\">";
+    echo "      <input type=\"hidden\" name=\"device\" value=\"$switch_id_name\">";
+    echo "      <input type=\"hidden\" name=\"port\" value=\"$i\">";
+    echo "      <input type=\"hidden\" name=\"old_state\" value=\"$onoff\">";
+
     echo "    <div class=\"slideThree\">";
     $id = $switch_id."_".$i;
-    echo "      <input type=\"checkbox\" value=\"None\" id=\"$id\" name=\"check\" $checked/ $disabled>";
-    echo "      <label for=\"$id\"></label>";
+    echo "      <input type=\"checkbox\" value=\"None\" id=\"$id\" name=\"check\" $checked $disabled>";
+    echo "      <input type=\"submit\" value=\" \">";
+    #echo "      <label for=\"$id\"></label>";
     echo "    </div>";
+    echo "    </form>";
     echo "  </td>";
   }
   echo "  </tr>";
