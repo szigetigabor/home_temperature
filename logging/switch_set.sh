@@ -47,33 +47,7 @@ fi
 ####################################
 #  read the current switch status  #
 ####################################
-read_status() {
-    # 1st parameter: path of the output's file
-    status=`dd if=$1 bs=1 count=1 2>>/dev/null|hexdump|head -1`
-    status=${status:10:2}
-    status=`echo "${status^^}"`
-
-    echo $status
-}
-
-read_binary_status() {
-    # 1st parameter: path of the output's file
-    status=`read_status $1`
-
-    # convert hexa to binary
-    binary_status=`echo "obase=2; ibase=16; $status" | bc`
-
-    prefix=""
-    for (( c=${#binary_status}; c<8; c++ ))
-    do
-       prefix="0"$prefix
-    done
-    binary_status=$prefix$binary_status
-
-    echo $binary_status
-}
-
-status_bin=`read_binary_status $switch_output`
+status_bin=`./switch_read.sh $device_id`
 echo $status_bin
 
 Pport=0
@@ -107,7 +81,7 @@ while [ "$control_status" != "$Nnext_value" ]; do
     echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1 2>>/dev/null
 
     # read back the new status
-    control_status=`read_status $switch_output`
+    control_status=`./switch_read.sh $device_id hexa`
     echo "read: $control_status"
     sleep 1
 done

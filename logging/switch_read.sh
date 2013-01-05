@@ -3,15 +3,21 @@
 ########################
 # Script paramters:    #
 #   $1 Device ID       #
+#   $2 hexa (optional) #
 ########################
 
 if [ $# -lt 1 ]
 then 
-  echo "Syntax Error, Please provide at least one device id."
+  echo "Syntax Error, Please provide at least one device id and one optional hexa parameter."
   exit 1
 fi
 
 device_id=$1
+output_type="binary"
+if [ $# -gt 1 ]
+then
+  output_type=$2
+fi
 
 switch_output="/sys/bus/w1/devices/$device_id/output"
 
@@ -31,6 +37,11 @@ read_binary_status() {
     # 1st parameter: path of the output's file
     status=`read_status $1`
 
+    if [ $output_type == "hexa" ]
+    then
+      echo $status
+      exit 0
+    fi
     # convert hexa to binary
     binary_status=`echo "obase=2; ibase=16; $status" | bc`
 
