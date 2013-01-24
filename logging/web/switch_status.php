@@ -12,7 +12,7 @@ if (isset($_GET["filter"])) {
 //POST FORM START
 if (count($_POST) >= 3){
   $device=$_POST["device"];
-  $port=intval($_POST["port"])+1;
+  $port=intval($_POST["port"]);
   $new_state=$_POST["old_state"];
 
   if ($new_state == "on" || empty($new_state)) {
@@ -111,9 +111,9 @@ foreach($switches as $switch_id)
   if ( $get_filter != "" && $get_filter != $switch_id_name ) {
     continue;
   }
-  for($i=0; $i<8; $i++){
+  for($i=1; $i<9; $i++){
     echo "  <tr>";
-    if ( $i == 0) {
+    if ( $i == 1) {
       echo "  <td rowspan=\"8\">$switch_id_name</td>";
     }
     echo "  <td>$i</td>";

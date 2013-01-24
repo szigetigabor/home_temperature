@@ -82,8 +82,8 @@ foreach($devices as $device)
   }
   echo "         <select name=\"switch_port\">";
   echo "           <option value=\"\" $selected></option>";
-  for ($i=0; $i<8; $i++) {
-   $value = $i+1;
+  for ($i=1; $i<9; $i++) {
+   $value = $i;
    $selected = "";
    if ( $i == $port && strlen($port) > 0) {
      $selected = "selected=\"selected\"";
