@@ -2,7 +2,7 @@
 cd /home/pi/logging
 
 # Read temperature from sensors
-sensors=`cat /sys/bus/w1/devices/w1\ bus\ master/w1_master_slaves;`
+sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
 
 for line in $sensors
 do
@@ -30,6 +30,9 @@ do
 
 
   # Update database
+  if [ ! -e temperature5004_$line.rrd ]; then
+     ./make_temps.sh
+  fi
   rrdtool update temperature5004_$line.rrd N:$temp
 
   # Create graphs
