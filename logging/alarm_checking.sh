@@ -64,7 +64,6 @@ do
 
       deviceID=${switch:0:15}
       port=${switch:16:1}
-      let "port=port+1"
       heating_mode=""; 
       if [ $temp -lt $alarm ]; then
         heating_mode="on";
