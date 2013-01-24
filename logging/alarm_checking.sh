@@ -3,7 +3,7 @@
 sensor_settings_path="/home/pi/logging"
 
 # Read temperature from sensors
-sensors=`cat /sys/bus/w1/devices/w1\ bus\ master/w1_master_slaves;`
+sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
 
 for line in $sensors
 do
@@ -11,15 +11,26 @@ do
       continue
    fi
    if [ -d $sensor_settings_path/$line ]; then
-      if [ ! -e $sensor_settings_path/$line/value ]; then
+      # read last stored temperature from file
+      #if [ ! -e $sensor_settings_path/$line/value ]; then
+      #    continue
+      #fi 
+      #temp=`cat $sensor_settings_path/$line/value;`
+
+      # read last stored temperature from DB
+      if [ ! -e $sensor_settings_path/temperature5004_$line.rrd ]; then
           continue
-      fi 
-      temp=`cat $sensor_settings_path/$line/value;`
+      fi
+      temp_db=`rrdtool lastupdate $sensor_settings_path/temperature5004_$line.rrd |tail -1|cut -c 13-;`
+      # convert the temperature
+      pos=`expr index "$temp_db" .`
+      temp=${temp_db:0:$pos-1}${temp_db:$pos}
 
       if [ ! -e $sensor_settings_path/$line/alarm ]; then
           echo "No alarm set for the following device: $line"
           continue
       fi
+
       alarm=`cat $sensor_settings_path/$line/alarm;`
 
       # convert the alarm temperature
