@@ -556,3 +556,20 @@ img.graph {
     height:75%;
     width:75%;
 }
+
+#clock {
+ float: right;
+ position: relative;
+ top:  2px; #without date: 7px
+
+  font-weight: bold;
+  color: #e7e5e5;
+  text-decoration: none;
+  display: block;
+  padding:  8px 20px;
+  margin: 0;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  text-shadow: 0 1px 1px rgba(0,0,0, .3);
+}

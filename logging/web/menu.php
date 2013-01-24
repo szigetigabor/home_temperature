@@ -1,3 +1,8 @@
+<script type="text/javascript" src="prototype.js"></script>
+<script type="text/javascript"> new Ajax.PeriodicalUpdater('clock', 'clock.php', {   method: 'get',   frequency: 1 });</script>
+
+<div id="clock"></div>
+
 <div id='cssmenu'>
 <ul>
    <li class='active '><a href='home.php'><span>Home</span></a></li>
@@ -7,10 +12,12 @@
          <li><a href='mode.php'><span>Mode</span></a></li>
       </ul>
    </li>
+   <li><a href='temp_graph.php'><span>Temperature graphs</span></a></li>
    <li class='has-sub '><a href='#'><span>Admin</span></a>
    <ul>
       <li><a href='alias.php'><span>Alias</span></a></li>
       <li><a href='lang.php'><span>Language</span></a></li>
+      <li><a href='timezones.php'><span>TimeZones</span></a></li>
       <li class='has-sub '><a href='#'><span>Mode<div id="menu_arrow">></div></span></a>
          <ul>
             <li><a href='add_mode.php'><span>Add Mode</span></a></li>
@@ -26,7 +33,6 @@
       </li>
    </ul>
    </li>
-   <li><a href='#'><span>About</span></a></li>
    <li><a href='#'><span>Contact</span></a></li>
 </ul>
 </div>

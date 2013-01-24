@@ -81,4 +81,12 @@ $time_values = array("0:30","1","1:30","2","2:30","3","3:30","4","4:30","5","5:3
 
 $split_times = array("6:30", "12:30", "18:30");
 
+// TimeZone settings
+$current = read_file($sensors_settings_path."/timezone");
+$current = trim($current, " \n.");
+if ( $current == "" ) {
+  $current=date_default_timezone_get();
+}
+date_default_timezone_set($current);
+
 ?>
