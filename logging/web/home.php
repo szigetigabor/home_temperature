@@ -18,15 +18,14 @@ foreach($_POST as $key=>$value)
 
 
 echo "<p>";
-
+//GET FORM START
 $get_filter="28-";
 if (isset($_GET["filter"])) {
   $get_filter=$_GET["filter"];
 }
-
 // FORM END
 
-//GLBOAL MODE
+//GLOBAL MODE
 $global_mode = read_file($sensors_settings_path."/current_mode");
 $global_mode = trim($global_mode, " \n.");
 if ($global_mode == "") {
