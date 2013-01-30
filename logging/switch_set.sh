@@ -13,6 +13,8 @@ then
   exit 1
 fi
 
+script_path="/home/pi/logging"
+
 device_id=$1
 port=$2
 value=$3
@@ -47,7 +49,7 @@ fi
 ####################################
 #  read the current switch status  #
 ####################################
-status_bin=`./switch_read.sh $device_id`
+status_bin=`$script_path/switch_read.sh $device_id`
 echo $status_bin
 
 Pport=0
@@ -81,7 +83,7 @@ while [ "$control_status" != "$Nnext_value" ]; do
     echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1 2>>/dev/null
 
     # read back the new status
-    control_status=`./switch_read.sh $device_id hexa`
+    control_status=`$script_path/switch_read.sh $device_id hexa`
     echo "read: $control_status"
     sleep 1
 done

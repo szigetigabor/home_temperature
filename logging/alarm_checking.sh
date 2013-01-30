@@ -32,6 +32,7 @@ do
       fi
 
       alarm=`cat $sensor_settings_path/$line/alarm;`
+      #alarm=`$sensor_settings_path/get_alarm.sh $line;`
 
       # convert the alarm temperature
       pos=`expr index "$alarm" .`
@@ -67,10 +68,10 @@ do
       heating_mode=""; 
       if [ $temp -lt $alarm ]; then
         heating_mode="on";
-        ./switch_set.sh $deviceID $port 1
+        $sensor_settings_path/switch_set.sh $deviceID $port 1
       else
         heating_mode="off";
-        ./switch_set.sh $deviceID $port 0
+        $sensor_settings_path/switch_set.sh $deviceID $port 0
       fi
 
       echo "$line: heating " `echo $heating_mode | tr '[:lower:]' '[:upper:]'`;
