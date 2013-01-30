@@ -9,8 +9,8 @@ foreach($_POST as $key=>$value)
  write_file($file,$value);
 
  // update the relays
- $command = "$sensors_settings_path/alarm_checking.sh $key";
- exec ($command, $output);
+ $command = "/bin/bash $sensors_settings_path/alarm_checking.sh $key";
+ exec ($command, $output_post);
  //$output = system($command, $retval);
 }
 //FORM END
@@ -99,21 +99,10 @@ foreach($devices as $device)
   }
   $device_id=$device_name;
   $settings_path=$sensors_settings_path."/".$device_name;
-  $filename=$settings_path."/value";
-  if ($get_realtime == "1") {
-      $filename = $device."/w1_slave";
-  }
+  $filename=$settings_path."/value"; //TODO: read from DB
+
   $value = read_file($filename);
-  $pos = strpos($value, "t=");
-  if ($pos === false && $get_realtime == "1") {
-    // BAD query
-    echo "<br>Bad query by <b> $device_name</b>.";
-  } else {
-    if ( $get_realtime == "1" ) {
-        $value = substr($value, $pos+2);
-    }
-    $value = $value/1000;
-  }
+  $value = $value/1000;
 
   //ALIAS
   $alias = read_file($settings_path."/alias");
@@ -123,8 +112,10 @@ foreach($devices as $device)
   }
 
   //ALARM
-  $alarm = read_file($settings_path."/alarm");
-  $alarm = trim($alarm, " \n.");
+  $output=NULL;
+  $command = "/bin/bash $sensors_settings_path/get_alarm.sh $device_id";
+  exec ($command, $output);
+  $alarm=$output[0];
   $disabled="";
   if ($alarm == "") {
       $disabled = "disabled=\"disabled\"";
