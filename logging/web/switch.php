@@ -2,7 +2,7 @@
 include 'includes.php';
 
 //POST FORM START
-if ( isset($_POST) ){
+if ( isset($_POST) && count($_POST) > 0 ){
   $sensor_id=$_POST["temp_sensor_id"];
   $file = $sensors_settings_path."/".$sensor_id."/switch";
   $mode = 'w';
@@ -58,7 +58,7 @@ foreach($devices as $device)
   echo "       <form method=\"post\">";
   echo "         <input type=\"hidden\" name=\"temp_sensor_id\" value=\"$device_name\" >";
   echo "         <select name=\"switch_name\">";
-  echo "           <option value=\"\" $selected></option>";
+  echo "           <option value=\"\"></option>";
 
   foreach( $switch_ids as $id ){
     $id=substr($id, strrpos($id, "/")+1);

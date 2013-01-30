@@ -33,7 +33,8 @@ function mode_temp($values, $time){
 $time_schedule="";
 //POST FORM START
 if ( isset($_POST) && count($_POST) > 0 ){
-  if ($_POST["post_time_schedule"] != "") {
+  if ( array_key_exists("post_time_schedule", $_POST) 
+       && $_POST["post_time_schedule"] != "") {
     $time_schedule = $_POST["post_time_schedule"];
 
    // $read_times = read_file($time_settings_path."/$time_schedule");
@@ -128,7 +129,7 @@ if ($time_schedule == ""){
 echo "<center>";
 echo " <form method=\"post\">";
 echo "  Turn on per day: <select name=\"post_time_schedule\">";
-echo "     <option value=\"0\" $selected></option>";
+echo "     <option value=\"0\"></option>";
 //put each schedule time setting's name
 for($i=1; $i<6; $i++)
 {

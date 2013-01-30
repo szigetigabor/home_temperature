@@ -25,9 +25,8 @@ if (count($_POST) >= 3){
  #write_file($file,$value);
 
  # update the relays
- $command = "$sensors_settings_path/switch_set.sh $device $port $new_state";
+ $command = "/bin/bash $sensors_settings_path/switch_set.sh $device $port $new_state";
  exec ($command, $output);
-
 }
 //FORM END
 
@@ -117,7 +116,11 @@ foreach($switches as $switch_id)
       echo "  <td rowspan=\"8\">$switch_id_name</td>";
     }
     echo "  <td>$i</td>";
-    $who_use_it = $used_switches[$switch_id_name][$i]; 
+    $who_use_it=NULL;
+    if ( array_key_exists("$i", $used_switches[$switch_id_name]) ) {
+      $who_use_it = $used_switches[$switch_id_name][$i];
+    }
+
     // ALIAS
     $alias = read_file($sensors_settings_path."/".$who_use_it."/alias");
     $alias = trim($alias, " \n.");

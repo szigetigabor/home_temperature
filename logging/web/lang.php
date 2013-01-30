@@ -19,13 +19,11 @@ echo "<center>";
 echo "<form method=\"post\">";
 echo "<table id=\"mode\">";
 
-//print each mode settings
+//print each lang settings
 foreach($langs as $lang)
 {
   $lang_name = substr($lang, strrpos($lang, "/")+1);
   $lang_name = substr($lang_name,0, strrpos($lang_name, "."));
-
-  $mode_description = read_file($mode);
 
   echo "<tr id=\"mode\">";
   echo "<td>";
