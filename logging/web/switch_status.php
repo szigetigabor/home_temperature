@@ -142,7 +142,7 @@ foreach($switches as $switch_id)
         $checked="checked";
       }
     } else {
-      $onoff= substr($switch_output[0],7-$i,1);
+      $onoff= substr($switch_output[0],8-$i,1);
       if ($onoff == "0"){
         $onoff="on";
         $checked="checked";
@@ -160,7 +160,7 @@ foreach($switches as $switch_id)
     echo "    <div class=\"slideThree\">";
     $id = $switch_id."_".$i;
     echo "      <input type=\"checkbox\" value=\"None\" id=\"$id\" name=\"check\" $checked $disabled>";
-    echo "      <input type=\"submit\" value=\" \">";
+    echo "      <input type=\"submit\" value=\" \" $disabled>";
     #echo "      <label for=\"$id\"></label>";
     echo "    </div>";
     echo "    </form>";
