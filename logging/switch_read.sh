@@ -37,6 +37,12 @@ read_binary_status() {
     # 1st parameter: path of the output's file
     status=`read_status $1`
 
+    #error handling
+    if [ -z "${status}" ] || [ $status == "FF" ];
+    then
+      status=`read_status $1`
+    fi
+
     if [ $output_type == "hexa" ]
     then
       echo $status
