@@ -1,5 +1,5 @@
 <?php
-include 'includes.php';
+require_once('includes.php');
 
 echo date('Y-m-d');
 echo "<br>";

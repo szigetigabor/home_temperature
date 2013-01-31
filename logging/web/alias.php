@@ -1,5 +1,5 @@
 <?php
-include 'includes.php';
+require_once('includes.php');
 
 //POST FORM START
 foreach($_POST as $key=>$value)

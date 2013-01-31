@@ -1,5 +1,5 @@
 <?php
-include 'includes.php';
+require_once('includes.php');
 
 function alert($msg)
 {

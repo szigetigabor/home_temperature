@@ -1,5 +1,5 @@
 <?php
-include 'includes.php';
+require_once('includes.php');
 
 //POST FORM START
 if ( isset($_POST) && count($_POST) > 0 ){
