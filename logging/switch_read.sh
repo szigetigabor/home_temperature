@@ -35,13 +35,26 @@ read_status() {
 
 read_binary_status() {
     # 1st parameter: path of the output's file
-    status=`read_status $1`
-
-    #error handling
-    if [ -z "${status}" ] || [ $status == "FF" ];
-    then
+    nr=0
+    limit=5
+    while [ -z "${status}" ] || [ $status == "FF" ];
+    do
+      # read the status from the switch
       status=`read_status $1`
-    fi
+
+      #error handling
+      if [ -z "${status}" ]; then
+        continue
+      fi
+      if [ $status == "FF" ]; then
+        let "nr=nr+1"
+      fi
+      if [ $nr -eq $limit ] && [ $status == "FF" ];
+      then
+        break
+      fi 
+      # end of the error handling
+    done
 
     if [ $output_type == "hexa" ]
     then
