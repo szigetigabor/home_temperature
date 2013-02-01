@@ -37,7 +37,8 @@ read_binary_status() {
     # 1st parameter: path of the output's file
     nr=0
     limit=5
-    while [ -z "${status}" ] || [ $status == "FF" ];
+    previous_value="N/A"
+    while [ -z "${status}" ] || [ $nr -le $limit ];
     do
       # read the status from the switch
       status=`read_status $1`
@@ -46,13 +47,15 @@ read_binary_status() {
       if [ -z "${status}" ]; then
         continue
       fi
+      let "nr=nr+1"
       if [ $status == "FF" ]; then
-        let "nr=nr+1"
+        continue
       fi
-      if [ $nr -eq $limit ] && [ $status == "FF" ];
+      if [ "$previous_value" == "$status" ];
       then
         break
-      fi 
+      fi
+      previous_value=$status
       # end of the error handling
     done
 
