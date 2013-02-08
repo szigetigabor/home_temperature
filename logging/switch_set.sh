@@ -38,8 +38,9 @@ else
 fi
 
 switch_output="/sys/bus/w1/devices/$device_id/output"
+grant=`ls -l $switch_output`
 
-if [ -w $switch_output ]; then
+if [ `echo ${grant:7:2}` == "rw" ]; then
     echo "Output writeable."
 else
     echo "Add write access for the other Group."
@@ -63,10 +64,11 @@ fi
 #  set the new value  #
 #######################
 next_value_bin=$status_bin
-next_value_bin=`echo $next_value_bin | sed s/./$value/$port`
 
 # change the port's value
-echo $next_value_bin | sed s/./$value/$port
+next_value_bin=`echo $next_value_bin | sed s/./$value/$port`
+echo $next_value_bin
+
 # convert binary to hexa
 next_value=`echo "obase=16; ibase=2; $next_value_bin" | bc`
 
