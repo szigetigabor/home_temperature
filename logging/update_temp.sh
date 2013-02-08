@@ -1,5 +1,7 @@
 #!/bin/bash
-cd /home/pi/logging
+sensor_settings_path="/home/pi/logging"
+
+cd $sensor_settings_path
 
 # Read temperature from sensors
 sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
@@ -35,12 +37,31 @@ do
   fi
   rrdtool update temperature5004_$line.rrd N:$temp
 
+  alias=$line
+  if [ -e $line/alias ]; then
+    alias=`cat $line/alias`
+  fi
   # Create graphs
-  rrdtool graph /var/www/temp_graphs/$line/temp_h.png --start -1h --title "Hourly graph" DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"Temperature [deg C]" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
-  rrdtool graph /var/www/temp_graphs/$line/temp_d.png --start -1d --title "Daily graph" DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"Temperature [deg C]" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
-  rrdtool graph /var/www/temp_graphs/$line/temp_w.png --start -1w --title "Weekly graph" DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"Temperature [deg C]" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
-  rrdtool graph /var/www/temp_graphs/$line/temp_m.png --start -1m --title "Monthly graph" DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"Temperature [deg C]" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
-  rrdtool graph /var/www/temp_graphs/$line/temp_y.png --start -1y --title "Yearly graph" DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"Temperature [deg C]" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
+  rrdtool graph /var/www/temp_graphs/$line/temp_h.png --start -1h --title "Hourly graph" \
+       --watermark "`date`" \
+       --vertical-label "Temperature (C)" \
+       DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"$alias" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
+  rrdtool graph /var/www/temp_graphs/$line/temp_d.png --start -1d --title "Daily graph" \
+       --watermark "`date`" \
+       --vertical-label "Temperature (C)" \
+       DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"$alias" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
+  rrdtool graph /var/www/temp_graphs/$line/temp_w.png --start -1w --title "Weekly graph" \
+       --watermark "`date`" \
+       --vertical-label "Temperature (C)" \
+       DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"$alias" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
+  rrdtool graph /var/www/temp_graphs/$line/temp_m.png --start -1m --title "Monthly graph" \
+       --watermark "`date`" \
+       --vertical-label "Temperature (C)" \
+       DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"$alias" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
+  rrdtool graph /var/www/temp_graphs/$line/temp_y.png --start -1y --title "Yearly graph" \
+       --watermark "`date`" \
+       --vertical-label "Temperature (C)" \
+       DEF:temp=temperature5004_$line.rrd:temp:AVERAGE LINE1:temp#0000FF:"$alias" GPRINT:temp:MIN:"min %2.2lf%sC" GPRINT:temp:LAST:"last %2.2lf%sC" GPRINT:temp:MAX:"max %2.2lf%sC"
   #0000FF means blue trace color in the graphs.
   sleep 1
 done
