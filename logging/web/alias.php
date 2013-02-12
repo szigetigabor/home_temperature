@@ -1,6 +1,10 @@
 <?php
 require_once('includes.php');
 
+if (!isIPIn($ip, $net, $mask)) {
+  header('Location: home.php');
+}
+
 //POST FORM START
 foreach($_POST as $key=>$value)
 {

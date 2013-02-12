@@ -89,4 +89,21 @@ if ( $current == "" ) {
 }
 date_default_timezone_set($current);
 
+// IP masking, sequrity function
+function isIPIn($ip, $net, $mask) {
+    //doesn't check for the return value of ip2long
+    $ip = ip2long($ip);
+    $rede = ip2long($net);
+    $mask = ip2long($mask);
+
+    //AND
+    $res = $ip & $mask;
+    return ($res == $rede);
+}
+
+$mask="0.0.0.0";
+$ip=$_SERVER["REMOTE_ADDR"];
+$net="0.0.0.0";
+
+
 ?>
