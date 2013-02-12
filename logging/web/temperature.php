@@ -128,20 +128,25 @@ foreach($devices as $device)
   }
   $device_id=$device_name;
   $settings_path=$sensors_settings_path."/".$device_name;
-  $filename=$settings_path."/value";
   if ($get_realtime == "1") {
       $filename = $device."/w1_slave";
-  }
-  $value = read_file($filename);
-  $pos = strpos($value, "t=");
-  if ($pos === false && $get_realtime == "1") {
-    // BAD query
-    echo "<br>Bad query by <b> $device_name</b>.";
+  
+      $value = read_file($filename);
+      $pos = strpos($value, "t=");
+      if ($pos === false && $get_realtime == "1") {
+        // BAD query
+        echo "<br>Bad query by <b> $device_name</b>.";
+      } else {
+        if ( $get_realtime == "1" ) {
+            $value = substr($value, $pos+2);
+        }
+        $value = $value/1000;
+      }
   } else {
-    if ( $get_realtime == "1" ) {
-        $value = substr($value, $pos+2);
-    }
-    $value = $value/1000;
+      $output_temp=NULL;
+      $command="rrdtool lastupdate $sensors_settings_path/temperature5004_$device_name.rrd |tail -1|cut -c 13-";
+      exec ($command, $output_temp);
+      $value=$output_temp[0];
   }
 
   //ALIAS

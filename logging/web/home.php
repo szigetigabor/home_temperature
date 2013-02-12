@@ -99,10 +99,11 @@ foreach($devices as $device)
   }
   $device_id=$device_name;
   $settings_path=$sensors_settings_path."/".$device_name;
-  $filename=$settings_path."/value"; //TODO: read from DB
 
-  $value = read_file($filename);
-  $value = $value/1000;
+  $output_temp=NULL;
+  $command="rrdtool lastupdate $sensors_settings_path/temperature5004_$device_name.rrd |tail -1|cut -c 13-";
+  exec ($command, $output_temp);
+  $value=$output_temp[0];
 
   //ALIAS
   $alias = read_file($settings_path."/alias");
