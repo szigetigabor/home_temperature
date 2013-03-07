@@ -8,7 +8,7 @@ health_info() {
 
   _MbTemp=0;
   _CpuTemp=`vcgencmd measure_temp|cut -f 2 -d "="| cut -f 1 -d "'"`;
-  _CpuUuser=`top -bn1|head -3|tail -n +3|cut -f 1 -d ,|cut -f 3 -d ' '`;
+  _CpuUuser=`top -bn1|head -3|tail -n +3|cut -f 1 -d ,|cut -f 2 -d ' '`;
   _CpuUsys=`top -bn1|head -3|tail -n +3|cut -f 2 -d ,|cut -f 3 -d ' '`;
   _VCore=`vcgencmd measure_volts core|cut -f 2 -d "="|cut -f 1 -d "V"`;
   _Plus12V=0;
