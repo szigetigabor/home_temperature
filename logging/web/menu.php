@@ -12,7 +12,18 @@
          <li><a href='mode.php'><span>Mode</span></a></li>
       </ul>
    </li>
-   <li><a href='temp_graph.php'><span>Temperature graphs</span></a></li>
+   <li class='has-sub '><a href='#'><span>Graphs</span></a>
+      <ul>
+         <li><a href='temp_graph.php'><span>Temperature</span></a></li>
+         <li><a href='lux_graph.php'><span>LUX</span></a></li>
+         <li><a href='hw_graph.php'><span>Hardware Monitoring</span></a></li>
+      </ul>
+   </li>
+<?php
+require_once('includes.php');
+
+if (isIPIn($ip, $net, $mask)) {
+?>
    <li class='has-sub '><a href='#'><span>Admin</span></a>
    <ul>
       <li><a href='alias.php'><span>Alias</span></a></li>
@@ -28,11 +39,14 @@
       <li class='has-sub '><a href='#'><span>Switch<div id="menu_arrow">></div></span></a>
         <ul>
           <li><a href='switch.php'><span>Temperature mapping</span></a></li>
-          <li><a href='switch_status.php'><span>Swithc status</span></a></li>
+          <li><a href='switch_status.php'><span>Switch status</span></a></li>
         </ul>
       </li>
    </ul>
    </li>
+<?php
+}
+?>
    <li><a href='#'><span>Contact</span></a></li>
 </ul>
 </div>
