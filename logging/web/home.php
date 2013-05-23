@@ -2,6 +2,9 @@
 require_once('includes.php');
 include 'menu.php';
 
+echo "<script src=\"jquery.min.js\"></script>";
+echo "<script src=\"jquery.knob.js\"></script>";
+#var_dump($_POST);
 //POST FORM START
 foreach($_POST as $key=>$value)
 {
@@ -151,6 +154,7 @@ foreach($devices as $device)
       echo "  <td>";
       echo "       <img src=\"\" width=\"1\" height=\"15\">";
       echo "       <form method=\"post\">";
+      echo "      <input type=\"test\" class=\"dial\" data-min=\"150\" data-max=\"300\" value=\"$alarm\" data-width=\"200\" data-fgColor=\"#888888\" data-cursor=true data-angleOffset=-125 data-angleArc=250 data-displayPrevious=true>";
       echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $global_disabled>";
       echo "      <input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
       echo "</form>";
@@ -186,3 +190,9 @@ foreach($devices as $device)
 ?>
 </table>
 </center>
+
+<script>
+$(function() {
+    $(".dial").knob();
+});
+</script>
