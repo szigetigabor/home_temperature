@@ -4,7 +4,7 @@ include 'menu.php';
 
 echo "<script src=\"jquery.min.js\"></script>";
 echo "<script src=\"jquery.knob.js\"></script>";
-#var_dump($_POST);
+
 //POST FORM START
 foreach($_POST as $key=>$value)
 {
@@ -119,7 +119,7 @@ foreach($devices as $device)
   $output=NULL;
   $command = "/bin/bash $sensors_settings_path/get_alarm.sh $device_id";
   exec ($command, $output);
-  $alarm=$output[0];
+  $alarm=$output[0]*10;
   $disabled="";
   if ($alarm == "") {
       $disabled = "disabled=\"disabled\"";
@@ -154,8 +154,7 @@ foreach($devices as $device)
       echo "  <td>";
       echo "       <img src=\"\" width=\"1\" height=\"15\">";
       echo "       <form method=\"post\">";
-      echo "      <input type=\"test\" class=\"dial\" data-min=\"150\" data-max=\"300\" value=\"$alarm\" data-width=\"200\" data-fgColor=\"#888888\" data-cursor=true data-angleOffset=-125 data-angleArc=250 data-displayPrevious=true>";
-      echo "      <input type=\"number\" name=\"$device_id\" min=\"16\" max=\"30\" step=\"0.1\" value=\"$alarm\" $global_disabled>";
+      echo "      <input type=\"test\" class=\"dial\" name=\"$device_id\" data-min=\"160\" data-max=\"300\" value=\"$alarm\" data-width=\"200\" data-fgColor=\"#888888\" data-cursor=true data-angleOffset=-125 data-angleArc=250 data-displayPrevious=true $global_disabled>";
       echo "      <input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
       echo "</form>";
       echo "  </td>";

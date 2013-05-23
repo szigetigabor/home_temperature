@@ -419,7 +419,7 @@
             if (null != v) {
                 this.cv = this.o.stopper ? max(min(v, this.o.max), this.o.min) : v;
                 this.v = this.cv;
-                this.$.val(this.v);
+                this.$.val(this.v/10);
                 this._draw();
             } else {
                 return this.v;
@@ -541,7 +541,8 @@
                 || this.v > this.o.max
             ) this.v = this.o.min;
 
-            this.$.val(this.v);
+            this.$.val(this.v/10);
+            this.cv = this.v;
             this.w2 = this.o.width / 2;
             this.cursorExt = this.o.cursor / 100;
             this.xy = this.w2;
@@ -593,7 +594,7 @@
 
         this.change = function (v) {
             this.cv = v;
-            this.$.val(v);
+            this.$.val(v/10);
         };
 
         this.angle = function (v) {
