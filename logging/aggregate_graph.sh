@@ -29,7 +29,7 @@ sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
 
 parameters="graph /var/www/temp_graphs/aggr_temp_${1}.png --start -1${1} --title ${title[$1]}_graph"
 #graph colors
-colors=( "#0000FF" "#CC0000" "#00FF00" )
+colors=( "#0000FF" "#CCCCCC" "#00FF00"  "#FF0000" "#8800FF" "#00FFFF" "#888800" "#008888")
 i=0
 for line in $sensors
 do
