@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import time
+from array import *
 import os, sys
 import RPi.GPIO as GPIO
 
@@ -58,7 +59,13 @@ GPIO.setup(SPICS, GPIO.OUT)
 potentiometer_adc = int(sys.argv[1]);
 
 # read the analog pin
-binary_value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+prev_values = array('i',[])
+diff = 5
+for i in range(5):
+  binary_value = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+  prev_values.append(binary_value)
+  if i > 0 and abs(prev_values[i]-prev_values[i-1]) < diff:
+    break
 
 try:
     output_format = sys.argv[2]
