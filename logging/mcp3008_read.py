@@ -4,6 +4,11 @@ from array import *
 import os, sys
 import RPi.GPIO as GPIO
 
+#
+# Usage: mcp3008_read.py <channel nr> [<output type> <input voltage>]
+#        output types: lux, volt
+#
+
 GPIO.setmode(GPIO.BCM)
 DEBUG = 0
 
@@ -86,6 +91,10 @@ if output_format == "lux":
     print lux
 elif output_format == "volt":
     input_voltage = 12.0
+    try:
+      input_voltage = float(sys.argv[3])
+    except (IndexError, ValueError):
+      input_voltage = 12.0
     reference = 3.3
     volt = (input_voltage * binary_value) / 1024 
     print volt
