@@ -1,6 +1,7 @@
 #/bin/bash
  
 rrdtool="/usr/bin/rrdtool"
+DB="health_db.rrd";
 
 health_info() {
   #_TOP=`top -bn1|head -1`
@@ -30,12 +31,17 @@ health_info() {
 ### change to the script directory
 cd /home/pi/logging/hwmonitor 
 
+# Update database
+if [ ! -e $DB ]; then
+   ./initialize_database.sh
+fi
+
 ### collect the data
 health_info
 
 echo $RETURN_VALUE
 ### update the database
-$rrdtool update health_db.rrd --template MbTemp:CpuTemp:CpuUuser:CpuUsys:VCore:Plus12V:Plus3V:Plus5V:Neg12V:CpuSpeed:GpuSpeed:LoadAvg N:$RETURN_VALUE
+$rrdtool update $DB --template MbTemp:CpuTemp:CpuUuser:CpuUsys:VCore:Plus12V:Plus3V:Plus5V:Neg12V:CpuSpeed:GpuSpeed:LoadAvg N:$RETURN_VALUE
 
 
 
