@@ -72,7 +72,16 @@ foreach($switches as $switch_id)
   if ($get_filter == $switch_id_name) {
     $selected = "selected=\"selected\"";
   }
-  echo "           <option value=\"$switch_id_name\" $selected>$switch_id_name</option>";
+
+  //ALIAS
+  $device_name=$switch_id_name;
+  $settings_path=$sensors_settings_path."/".$switch_id_name;
+  $alias = read_file($settings_path."/alias");
+  $alias = trim($alias, " \n.");
+  if ($alias != "") {
+      $device_name=$alias;
+  }
+  echo "           <option value=\"$switch_id_name\" $selected>$device_name</option>";
 }
 
 echo "         </select>";
