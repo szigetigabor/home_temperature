@@ -2,6 +2,10 @@
 # Read temperature from sensors
 sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
 
+if [ ! -e /var/www/temp_graphs ]; then
+    sudo mkdir /var/www/temp_graphs
+fi
+
 for line in $sensors
 do
   if [ ! -e /var/www/temp_graphs/$line ]; then
