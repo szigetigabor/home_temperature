@@ -8,6 +8,9 @@ fi
 
 for line in $sensors
 do
+  if [ `echo $line|cut -c1-3` != "28-" ]; then
+     continue
+  fi
   if [ ! -e /var/www/temp_graphs/$line ]; then
       sudo mkdir /var/www/temp_graphs/$line
   fi
