@@ -104,6 +104,8 @@ echo "  </thead>";
 
 echo "  <tbody>";
 
+$prefix="";
+
 foreach($switches as $switch_id)
 {
   $switch_id_name=substr($switch_id, strrpos($switch_id, "/")+1);
@@ -113,21 +115,21 @@ foreach($switches as $switch_id)
 
   echo "  <tr>";
   echo "    <td rowspan=\"6\">$switch_id_name</td>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/$switch_id_name/temp_h.png\" alt=\"hourly graph\" ></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/$switch_id_name/temp_d.png\" alt=\"daily graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/$switch_id_name/temp_w.png\" alt=\"weekly graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/$switch_id_name/temp_m.png\" alt=\"monthly graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/$switch_id_name/temp_y.png\" alt=\"yearly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/$switch_id_name/temp_h.png\" alt=\"hourly graph\" ></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/$switch_id_name/temp_d.png\" alt=\"daily graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/$switch_id_name/temp_w.png\" alt=\"weekly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/$switch_id_name/temp_m.png\" alt=\"monthly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/$switch_id_name/temp_y.png\" alt=\"yearly graph\" /></td></tr>";
   echo "  </tr>";
 }
 
 if ( $get_filter == "aggregated" ) {
   echo "  <tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/aggr_temp_h.png\" alt=\"hourly graph\" ></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/aggr_temp_d.png\" alt=\"daily graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/aggr_temp_w.png\" alt=\"weekly graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/aggr_temp_m.png\" alt=\"monthly graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/aggr_temp_y.png\" alt=\"yearly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/aggr_temp_h.png\" alt=\"hourly graph\" ></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/aggr_temp_d.png\" alt=\"daily graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/aggr_temp_w.png\" alt=\"weekly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/aggr_temp_m.png\" alt=\"monthly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/aggr_temp_y.png\" alt=\"yearly graph\" /></td></tr>";
   echo "  </tr>";
 
 }
