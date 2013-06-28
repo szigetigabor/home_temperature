@@ -58,6 +58,7 @@
         this.t = 0; // touches index
         this.isInit = false;
         this.fgColor = null; // main color
+        this.fgColorOrigin = null;
         this.pColor = null; // previous color
         this.dH = null; // draw hook
         this.cH = null; // change hook
@@ -98,6 +99,7 @@
                     displayInput : this.$.data('displayinput') == null || this.$.data('displayinput'),
                     displayPrevious : this.$.data('displayprevious'),
                     fgColor : this.$.data('fgcolor') || '#87CEEB',
+                    fgColorOrigin : this.$.data('fgcolor') || '#87CEEB',
                     inputColor: this.$.data('inputcolor') || this.$.data('fgcolor') || '#87CEEB',
                     inline : false,
                     step : this.$.data('step') || 1,
@@ -595,6 +597,22 @@
         this.change = function (v) {
             this.cv = v;
             this.$.val(v/10);
+            var middle = null;
+            var offset = 10;
+            var transp_min = 0.2;
+            var transp_max = 0.6;
+            var transp = 1;
+            middle = this.o.min + (this.o.max -this.o.min) / 2;
+            if ( v < middle - offset ) {
+                transp = (((v - this.o.min) * (transp_min - transp_max)) / (middle - this.o.min) ) + transp_max; 
+                this.fgColor = this.h2rgba( '#0000FF', transp);
+            }
+            else if ( v > middle + offset ) {
+                transp = (((v - this.o.max) * (transp_min - transp_max)) / (middle - this.o.max) ) + transp_max;
+                this.fgColor = this.h2rgba( '#FF0000', transp);
+            } else {
+                this.fgColor = this.fgColorOrigin;
+            }
         };
 
         this.angle = function (v) {
