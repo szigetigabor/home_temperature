@@ -4,6 +4,7 @@ sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
 
 if [ ! -e /var/www/temp_graphs ]; then
     sudo mkdir /var/www/temp_graphs
+    sudo chmod 777 /var/www/temp_graphs/
 fi
 
 for line in $sensors
