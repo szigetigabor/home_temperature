@@ -61,7 +61,13 @@ do
       fi
 
       #alias=`cat $sensor_settings_path/$line/alias;`
-      switch=`cat $sensor_settings_path/$line/switch;`
+      switch_file=$sensor_settings_path/$line/switch;
+      if [ ! -e $switch_file ]; then
+          echo "No switch set for the following device: $line"
+          continue
+      fi
+
+      switch=`cat $switch_file;`
 
       deviceID=${switch:0:15}
       port=${switch:16:1}
