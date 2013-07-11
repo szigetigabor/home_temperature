@@ -41,7 +41,7 @@ echo "<a href=\"".$own_name.$get_param."\" class=\"buttonclass\">Move to $button
 
 echo "<p>";
 
-$get_filter="28-";
+$get_filter="28";
 if (isset($_GET["filter"])) {
   $get_filter=$_GET["filter"];
 }
@@ -80,22 +80,22 @@ if ($get_filter == "") {
 
 echo "           <option value=\"\" $selected>all</option>";
 $selected = "";
-if ($get_filter == "28-") {
+if ($get_filter == "28") {
   $selected = "selected=\"selected\"";
 }
-echo "           <option value=\"28-\" $selected>Temperature</option>";
+echo "           <option value=\"28\" $selected>Temperature</option>";
 $selected = "";
 if ($get_filter == "-") {
   $selected = "selected=\"selected\"";
 }
 
-echo "           <option value=\"29-\" $selected>Switch</option>";
+echo "           <option value=\"29\" $selected>Switch</option>";
 $selected = "";
-if ($get_filter == "w1_") {
+if ($get_filter == "w1") {
   $selected = "selected=\"selected\"";
 }
 
-echo "           <option value=\"w1_\" $selected>1-wire master</option>";
+echo "           <option value=\"w1\" $selected>1-wire master</option>";
 echo "         </select>";
 echo "         <input type=\"submit\" value=\"Filter\">";
 echo "       </form>";
@@ -117,13 +117,13 @@ echo "       </form>";
 
 <?php
 // Filter option
-$filter = "28-";
+$filter = "28";
 
 //print each sensor device
 foreach($devices as $device)
 {
   $device_name=substr($device, strrpos($device, "/")+1);
-  if ( $get_filter != "" && $get_filter != substr($device_name,0,3) ) {
+  if ( $get_filter != "" && $get_filter != substr($device_name,0,2) ) {
     continue;
   }
   $device_id=$device_name;

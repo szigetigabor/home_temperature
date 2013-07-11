@@ -26,6 +26,7 @@ if ( $get_filter == "aggregated" ) {
 $sensors_pathes = glob($sensors_settings_path . "/*");
 $aliases = array();
 $switches = glob($sensors_path . "28-*");
+$switches = array_merge($switches, glob($sensors_owfs_path . "28*"));
 
 echo "       <form method=\"get\">";
 echo "         <select name=\"filter\">";
