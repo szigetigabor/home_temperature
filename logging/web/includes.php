@@ -2,9 +2,11 @@
 
 //path to 1-wire sensors to scan
 $sensors_path = "/sys/bus/w1/devices/";
+$sensors_owfs_path = "/tmp/1wire/";
 
 //get all sensors files.
 $devices = glob($sensors_path . "*");
+$devices = array_merge($devices, glob($sensors_owfs_path . "28*"));
 
 //path to stored 1-wire sensors settings
 $sensors_settings_path = "/home/pi/logging";
