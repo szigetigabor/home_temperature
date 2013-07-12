@@ -8,7 +8,8 @@ if (!isIPIn($ip, $net, $mask)) {
 //POST FORM START
 foreach($_POST as $key=>$value)
 {
- $file = $sensors_settings_path."/".$key."/alias";
+ $lkey=str_replace("28_","28.", $key);
+ $file = $sensors_settings_path."/".$lkey."/alias";
  write_file($file,$value);
 }
 //FORM END
