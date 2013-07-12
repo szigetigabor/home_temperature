@@ -42,6 +42,8 @@ if (isIPIn($ip, $net, $mask)) {
           <li><a href='switch_status.php'><span>Switch status</span></a></li>
         </ul>
       </li>
+      <li><a href='adc_status.php'><span>ADC status</span></a></li>
+      <li><a href='color.php'><span>Color mapping</span></a></li>
    </ul>
    </li>
 <?php
