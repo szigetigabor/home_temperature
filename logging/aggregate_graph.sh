@@ -19,19 +19,14 @@ if [ `echo $?` == "1" ]; then
   exit 1
 fi
 
-sensor_settings_path="/home/pi/logging"
-db_prefix="temperature5004_"
-
+prefix=$(dirname $0)
+source $prefix/config_temp.sh
 cd $sensor_settings_path
 
 # Read temperature from sensors
-sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves; ls /tmp/1wire`
-
-parameters="graph /var/www/temp_graphs/aggr_temp_${1}.png --start -1${1} --title ${title[$1]}_graph"
-#graph colors
-colors=( "#0000FF" "#CCCCCC" "#00FF00"  "#FF0000" "#8800FF" "#00FFFF" "#888800" "#008888" "#FF00FF" "#123456" )
+parameters="graph $www_path/aggr_temp_${1}.png --start -1${1} --title ${title[$1]}_graph"
 i=0
-for line in $sensors
+for line in $sensors_all
 do
     if [ `echo $line|cut -c1-2` != "28" ]; then
        continue
@@ -46,7 +41,7 @@ do
       fi
     fi
     # Create rrdtool parameters
-    parameters="${parameters} DEF:temp${alias}=${db_prefix}${line}.rrd:temp:AVERAGE LINE1:temp${alias}${colors[$i]}:$alias \
+    parameters="${parameters} DEF:temp${alias}=${db_prefix}_${line}.rrd:temp:AVERAGE LINE1:temp${alias}${colors[$i]}:$alias \
               GPRINT:temp${alias}:MIN:min\:%2.2lf%sC GPRINT:temp${alias}:LAST:last\:%2.2lf%sC GPRINT:temp${alias}:MAX:max\:%2.2lf%sC\n "
     let "i=i+1"
 done

@@ -1,9 +1,7 @@
 #!/bin/bash
 
-sensor_settings_path="/home/pi/logging"
-
-# Read temperature from sensors
-sensors=`cat /sys/bus/w1/devices/w1_bus_master1/w1_master_slaves;`
+prefix=$(dirname $0)
+source $prefix/config_temp.sh
 
 for line in $sensors
 do
@@ -17,11 +15,12 @@ do
       #fi 
       #temp=`cat $sensor_settings_path/$line/value;`
 
+      DB=$db_prefix"_"$line.rrd
       # read last stored temperature from DB
-      if [ ! -e $sensor_settings_path/temperature5004_$line.rrd ]; then
+      if [ ! -e $sensor_settings_path/$DB ]; then
           continue
       fi
-      temp_db=`rrdtool lastupdate $sensor_settings_path/temperature5004_$line.rrd |tail -1|cut -c 13-;`
+      temp_db=`rrdtool lastupdate $sensor_settings_path/$DB |tail -1|cut -c 13-;`
       # convert the temperature
       pos=`expr index "$temp_db" .`
       temp=${temp_db:0:$pos-1}${temp_db:$pos}

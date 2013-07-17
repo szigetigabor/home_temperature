@@ -5,7 +5,8 @@
 
 deviceID=$1;
 
-sensor_settings_path="/home/pi/logging"
+prefix=$(dirname $0)
+source $prefix/config.sh
 
 main_mode=`cat $sensor_settings_path/current_mode;`
 #echo "Main mode: ".$main_mode
