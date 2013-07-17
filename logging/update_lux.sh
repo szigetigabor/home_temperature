@@ -1,9 +1,8 @@
 #!/bin/bash
-sensor_settings_path="/home/pi/logging"
+prefix=$(dirname $0)
+source $prefix/config_lux.sh
 
 cd $sensor_settings_path
-
-DB="lux.rrd"
 
 # Read lux from sensor
 lux=`./adafruit_mcp3008.py 2>adc_error;`

@@ -1,9 +1,8 @@
 #!/bin/bash
-sensor_settings_path="/home/pi/logging"
+prefix=$(dirname $0)
+source $prefix/config_volt.sh
 
 cd $sensor_settings_path
-
-DB="volt.rrd"
 
 # Read lux from sensor
 volt=`./mcp3008_read.py 2 volt 2>adc_error;`

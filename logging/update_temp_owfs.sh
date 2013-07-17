@@ -1,13 +1,11 @@
 #!/bin/bash
-sensor_settings_path="/home/pi/logging"
+prefix=$(dirname $0)
+source $prefix/config_temp.sh
 
 cd $sensor_settings_path
 
 # Read temperature from sensors
-sensor_path="/tmp/1wire";
-sensors=`ls $sensor_path;`
-
-for line in $sensors
+for line in $sensors_owfs
 do
    if [ `echo $line|cut -c1-3` != "28." ]; then
       continue
@@ -21,7 +19,7 @@ do
 
  # while [ $crc = "NO" ]
  # do
-    sensor_output=$(cat $sensor_path/$line/temperature | cut -c 5-)
+    sensor_output=$(cat $sensors_owfs_path/$line/temperature | cut -c 5-)
 #    crc=$(cat $sensor_path/$line/crc8 )
     #echo $crc
  # done
@@ -33,10 +31,11 @@ do
 
 
   # Update database
-  if [ ! -e temperature5004_$line.rrd ]; then
+  DB=$db_prefix"_"$line.rrd
+  if [ ! -e $DB ]; then
      ./make_temps_owfs.sh
   fi
-  rrdtool update temperature5004_$line.rrd N:$temp
+  rrdtool update $DB N:$temp
 
   sleep 1
 done

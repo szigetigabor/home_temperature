@@ -1,5 +1,6 @@
 #!/bin/bash
-DB="lux.rrd"
+prefix=$(dirname $0)
+source $prefix/config_lux.sh
 
 if [ -e  $DB ]; then
     exit 0

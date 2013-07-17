@@ -19,21 +19,18 @@ if [ `echo $?` == "1" ]; then
   exit 1
 fi
 
-sensor_settings_path="/home/pi/logging"
-db_prefix="lux"
+prefix=$(dirname $0)
+source $prefix/config_lux.sh
 
 cd $sensor_settings_path
 
 # Read lux from sensors
 
-parameters="graph /var/www/temp_graphs/lux_${1}.png --start -1${1} --title ${title[$1]}_graph"
-#graph colors
-colors=( "#0000FF" "#CC0000" "#00FF00" )
+parameters="graph $www_path/lux_${1}.png --start -1${1} --title ${title[$1]}_graph"
 i=0
-
 line=""
-    # Create rrdtool parameters
-    parameters="${parameters} DEF:lux${line}=${db_prefix}${line}.rrd:lux:AVERAGE LINE1:lux${line}${colors[$i]}:$alias \
+# Create rrdtool parameters
+parameters="${parameters} DEF:lux${line}=${db_prefix}${line}.rrd:lux:AVERAGE LINE1:lux${line}${colors[$i]}:$alias \
               GPRINT:lux${line}:MIN:min\:%5.2lf%slux GPRINT:lux${line}:LAST:last\:%2.2lf%slux GPRINT:lux${line}:MAX:max\:%2.2lf%slux\n "
 
 # Create graphs

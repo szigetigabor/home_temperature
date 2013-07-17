@@ -1,5 +1,6 @@
 #!/bin/bash
-DB="volt.rrd"
+prefix=$(dirname $0)
+source $prefix/config_volt.sh
 
 if [ -e  $DB ]; then
     exit 0

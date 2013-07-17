@@ -5,9 +5,9 @@ source $prefix/config_temp.sh
 cd $sensor_settings_path
 
 # Get temperature devices
-for line in $sensors_owfs
+for line in $sensors
 do
-   if [ `echo $line|cut -c1-3` != "28." ]; then
+   if [ `echo $line|cut -c1-3` != "28-" ]; then
       continue
    fi
    if [ ! -d $line ]; then
