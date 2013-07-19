@@ -19,6 +19,19 @@ if ( $get_filter == "aggregated" ) {
  $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh y";
  exec ($command, $output);
 }
+
+if ( $get_filter == "generate" ) {
+  #TODO: use better file location
+  $file_time=filemtime("../temp_graphs/28-000003d1da64/temp_h.png");
+  $now=time();
+  $minutes=10;
+  if ( $file_time+($minutes *60) < $now){
+    #Generate graphs when the last modification time was later the the minutes variable's value
+    $command = "/bin/bash $sensors_settings_path/create_temp_graphs.sh";
+    exec ($command, $output);
+  }
+  $get_filter = "";
+}
 // FORM END
 
 
@@ -61,7 +74,7 @@ foreach($switches as $switch_id)
   $aliases[$switch_id_name] = $device_name;
   echo "           <option value=\"$switch_id_name\" $selected>$device_name</option>";
 }
-
+echo "           <option value=\"generate\" $selected>generate all graphs</option>";
 echo "         </select>";
 echo "         <input type=\"submit\" value=\"Filter\">";
 echo "       </form>";
