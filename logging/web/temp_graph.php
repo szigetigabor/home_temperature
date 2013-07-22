@@ -8,16 +8,38 @@ if (isset($_GET["filter"])) {
   $get_filter=$_GET["filter"];
 }
 if ( $get_filter == "aggregated" ) {
- $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh h";
- exec ($command, $output);
- $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh d";
- exec ($command, $output);
- $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh w";
- exec ($command, $output);
- $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh m";
- exec ($command, $output);
- $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh y";
- exec ($command, $output);
+  $now=time();
+  
+  $file_time=filemtime("../temp_graphs/aggr_temp_h.png");
+  $minutes=5;
+  if ( $file_time+($minutes *60) < $now){
+    $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh h";
+    exec ($command, $output);
+  }
+  $file_time=filemtime("../temp_graphs/aggr_temp_d.png");
+  $minutes=60;
+  if ( $file_time+($minutes *60) < $now){
+    $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh d";
+    exec ($command, $output);
+  }
+  $file_time=filemtime("../temp_graphs/aggr_temp_w.png");
+  $minutes=24*$minutes;
+  if ( $file_time+($minutes *60) < $now){
+    $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh w";
+    exec ($command, $output);
+  }
+  $file_time=filemtime("../temp_graphs/aggr_temp_m.png");
+  $minutes=7*$minutes;
+  if ( $file_time+($minutes *60) < $now){
+    $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh m";
+    exec ($command, $output);
+  }
+  $file_time=filemtime("../temp_graphs/aggr_temp_y.png");
+  $minutes=30*$minutes;
+  if ( $file_time+($minutes *60) < $now){
+    $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh y";
+    exec ($command, $output);
+  }
 }
 
 if ( $get_filter == "generate" ) {
