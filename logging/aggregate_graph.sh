@@ -7,12 +7,6 @@ containsElement () {
 }
 
 option=( "h" "d" "w" "m" "y" )
-typeset -A title
-title['h']="Hourly"
-title['d']="Daily"
-title['w']="Weekly"
-title['m']="Monthly"
-title['y']="Yearly"
 containsElement $1 "${option[@]}"
 if [ `echo $?` == "1" ]; then
   echo "Wrong parameter! [h, w, d, m, y]"
@@ -24,7 +18,7 @@ source $prefix/config_temp.sh
 cd $sensor_settings_path
 
 # Read temperature from sensors
-parameters="graph $www_path/aggr_temp_${1}.png --start -1${1} --title ${title[$1]}_graph"
+parameters="graph $www_path/aggr_temp_${1}.png --start -1${1} --title ${title[$1]}"
 i=0
 for line in $sensors_all
 do
