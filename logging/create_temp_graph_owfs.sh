@@ -29,7 +29,7 @@ do
   now=`date +%s`
   file=$www_path/$line/temp_h.png
   mode_time=`stat -c %Y $file`
-  delay=60
+  delay=5
   if [ $(echo "$now - $mode_time" | bc) -gt $delay ]; then
     rrdtool graph $file --start -1h --title "Hourly graph" \
        --watermark "`date`" \
@@ -38,7 +38,7 @@ do
   fi
   file=$www_path/$line/temp_d.png
   mode_time=`stat -c %Y $file`
-  delay=$(echo "$delay * 60" | bc)
+  delay=60
   if [ $(echo "$now - $mode_time" | bc) -gt $delay ]; then
     rrdtool graph $file --start -1d --title "Daily graph" \
        --watermark "`date`" \
