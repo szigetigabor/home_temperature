@@ -3,19 +3,21 @@ require_once('includes.php');
 #include 'menu.php';
 
 //POST FORM START
-#$file_name="alarm";
 if (count($_POST) > 0 && isset($_POST["group"])){
   $file_name=$_POST["group"];
-  $groups="";
+  $_groups="";
   foreach($_POST as $key=>$value)
   {
     if($key == "group"){
       continue;
     }
-    $groups .= $value.", ";
+    $_groups .= $value.", ";
   }
   $file = $group_settings_path."/$file_name";
-  write_file($file,$groups);
+  write_file($file,$_groups);
+
+  // reread groups
+  $groups = glob($group_settings_path . "/*");
 }
 //FORM END
 
@@ -27,39 +29,35 @@ if (isset($_GET["group"])) {
    $get_group=$_GET["group"];
    $file = $group_settings_path."/".$get_group;
    $get_selected = read_file($file);
-   //$get_selected = trim($get_mode, " ,\n.");
    $get_selected = explode(', ', $get_selected);
-
    $setting=true;
 }
 //FORM END
 
-//if ($setting) {
-  echo "<table id=\"mode\">";
-  echo "<tr id=\"mode\">";
-  echo "<a href=\"group.php\" class=\"buttonclass\">New group</a>";
+echo "<table id=\"mode\">";
+echo "<tr id=\"mode\">";
+echo "<a href=\"group.php\" class=\"buttonclass\">New group</a>";
 
-  //print each groups
-  $i=0;
-  foreach($groups as $group)
-  {
-    $group_name = substr($group, strrpos($group, "/")+1);
-    $class="buttonclass";
-    if ( $get_group == $group_name ) {
-      $class = "active$class";
-    }
-    echo "<td id=\"mode\">";
-    echo "<a href=\"group.php?group=$group_name\" class=\"$class\">$group_name</a>";
-    echo "</td>";
-    $i++;
-    if ($i%7 == 0){
-      echo "</tr><tr id=\"mode\">";
-    }
+//print each groups
+$i=0;
+foreach($groups as $group)
+{
+  $group_name = substr($group, strrpos($group, "/")+1);
+  $class="buttonclass";
+  if ( $get_group == $group_name ) {
+    $class = "active$class";
   }
+  echo "<td id=\"mode\">";
+  echo "<a href=\"group.php?group=$group_name\" class=\"$class\">$group_name</a>";
+  echo "</td>";
+  $i++;
+  if ($i%7 == 0){
+    echo "</tr><tr id=\"mode\">";
+  }
+}
 
   echo"</tr>";
   echo "</table>";
-//}
 
 
 
@@ -109,7 +107,14 @@ foreach($devices as $device)
 
 ?>
     </td></tr>
-    <tr><td><input type="submit" value="Set" class="buttonclass"></td></tr>
+<?php
+if($setting){
+  echo "    <tr><td><input type=\"submit\" value=\"Update\" class=\"buttonclass\">";
+  echo "            <a href=\"delete_group.php?group_name=$get_group\" class=\"buttonclass\">Delete</a></td></tr>";
+} else {
+  echo "    <tr><td><input type=\"submit\" value=\"Set\" class=\"buttonclass\"></td></tr>";
+}
+?>
   </table>
 </form>
 </center>
