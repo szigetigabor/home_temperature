@@ -75,7 +75,7 @@ td#off
   background-color:#00FF00; /* green*/
 }
 
-table#mode, tr#mode, td#mode
+table#mode, tr#mode, td#mode, table#group, tr#group, td#group
 {
   border:0px;
   padding:0px;

@@ -112,7 +112,7 @@ if($setting){
   echo "    <tr><td><input type=\"submit\" value=\"Update\" class=\"buttonclass\">";
   echo "            <a href=\"delete_group.php?group_name=$get_group\" class=\"buttonclass\">Delete</a></td></tr>";
 } else {
-  echo "    <tr><td><input type=\"submit\" value=\"Set\" class=\"buttonclass\"></td></tr>";
+  echo "    <tr><td><input type=\"submit\" value=\"Create\" class=\"buttonclass\"></td></tr>";
 }
 ?>
   </table>

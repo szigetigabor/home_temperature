@@ -17,6 +17,7 @@
          <li><a href='temp_graph.php'><span>Temperature</span></a></li>
          <li><a href='lux_graph.php'><span>LUX</span></a></li>
          <li><a href='hw_graph.php'><span>Hardware Monitoring</span></a></li>
+         <li><a href='volt_graph.php'><span>Volt</span></a></li>
       </ul>
    </li>
 <?php
@@ -34,6 +35,12 @@ if (isIPIn($ip, $net, $mask)) {
             <li><a href='add_mode.php'><span>Add Mode</span></a></li>
             <li><a href='add_mode.php?mode'><span>Set Mode</span></a></li>
             <li><a href='delete_mode.php'><span>Delete Mode</span></a></li>
+         </ul>
+      </li>
+      <li class='has-sub '><a href='#'><span>Group<div id="menu_arrow">></div></span></a>
+         <ul>
+            <li><a href='group.php'><span>Set Group</span></a></li>
+            <li><a href='delete_group.php'><span>Delete Group</span></a></li>
          </ul>
       </li>
       <li class='has-sub '><a href='#'><span>Switch<div id="menu_arrow">></div></span></a>
