@@ -137,8 +137,14 @@ foreach($devices as $device)
   // ON/OFF
   $onoff = read_file($settings_path."/onoff");
   $onoff = trim($onoff, " \n.");
-  if ($onoff == "") {
-      $onoff="on/off";
+  if ($alarm!=50 && $value < ($alarm/10)) {
+      $onoff="on";
+  } else {
+      if ($onoff == "") {
+          $onoff="on/off";
+      } else {
+          $onoff="off";
+      }
   }
 
 
