@@ -36,13 +36,15 @@ echo "  </thead>";
 
 echo "  <tbody>";
 
+$prefix = "";
+
 if ( $get_filter == "lux" ) {
   echo "  <tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/lux_h.png\" alt=\"hourly graph\" ></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/lux_d.png\" alt=\"daily graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/lux_w.png\" alt=\"weekly graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/lux_m.png\" alt=\"monthly graph\" /></td></tr>";
-  echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/lux_y.png\" alt=\"yearly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/lux_h.png\" alt=\"hourly graph\" ></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/lux_d.png\" alt=\"daily graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/lux_w.png\" alt=\"weekly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/lux_m.png\" alt=\"monthly graph\" /></td></tr>";
+  echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/lux_y.png\" alt=\"yearly graph\" /></td></tr>";
   echo "  </tr>";
 
 }
