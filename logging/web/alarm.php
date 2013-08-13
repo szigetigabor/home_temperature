@@ -1,6 +1,5 @@
 <?php
 require_once('includes.php');
-require("color.inc.php");
 
 echo "<script src=\"jquery.min.js\"></script>";
 echo "<script src=\"jquery.knob.js\"></script>";
