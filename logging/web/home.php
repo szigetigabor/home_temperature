@@ -150,7 +150,7 @@ foreach($devices as $device)
 
   echo "  <tbody>";
   echo "  <tr>";
-  echo "     <td>$device_name</td>";
+  echo "     <td><a href=\"alarm.php?id=$device_id\" target=\"_blank\">$device_name</a></td>";
   if ( $value != "" ) {
       echo "     <td id=\"temperature\">$value C</td>";
   } else {
