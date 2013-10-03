@@ -16,18 +16,27 @@ do
    fi
 
   crc="NO" 
+  n=0
 
-  while [ $crc = "NO" ]
+  while [ $crc = "NO" -a $n -lt 10 ]
   do
     sensor_output=$(cat /sys/bus/w1/devices/$line/w1_slave | cut -c 30-)
     crc=$(echo $sensor_output | cut -c 7-10 )
     #echo $crc
+
+    temp_raw=$(echo $sensor_output | cut -c 11-)
+    temp=$(echo "0.001 * $temp_raw" | bc)
+
+    if [ $temp = 85.000 ]; then
+      temp=0.000
+      crc="NO"
+      n=$(echo "1 + $n" | bc)
+    fi
   done
-  temp_raw=$(echo $sensor_output | cut -c 11-)
-  temp=$(echo "0.001 * $temp_raw" | bc)
-  
+  echo $temp
+ 
   # update store values
-  echo $temp_raw > $line/value;
+  #echo $temp > $line/value;
 
 
   # Update database
