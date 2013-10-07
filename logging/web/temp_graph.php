@@ -35,7 +35,7 @@ if ( $get_filter == "aggregated" ) {
     exec ($command, $output);
   }
   $file_time=filemtime("../temp_graphs/aggr_temp_y.png");
-  $minutes=30*$minutes;
+  $minutes=4*$minutes;
   if ( $file_time+($minutes *60) < $now){
     $command = "/bin/bash $sensors_settings_path/aggregate_graph.sh y";
     exec ($command, $output);
