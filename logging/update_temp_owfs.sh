@@ -27,7 +27,7 @@ do
   temp_raw=$(echo "1000 * $temp" | bc )
 
   # update store values
-  echo $temp_raw > $line/value;
+#  echo $temp_raw > $line/value;
 
 
   # Update database
