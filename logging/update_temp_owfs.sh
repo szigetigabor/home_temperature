@@ -10,9 +10,11 @@ do
    if [ `echo $line|cut -c1-3` != "28." ]; then
       continue
    fi
+   #line=${line//./-}
    if [ ! -d $line ]; then
       mkdir $line
       chmod 777 $line
+      chown pi:pi $line
    fi
 
   crc="NO" 
