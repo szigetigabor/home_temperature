@@ -5,6 +5,7 @@ include 'menu.php';
 $command = "/bin/bash $sensors_settings_path/hwmonitor/create_graph.sh";
 exec ($command, $output);
 
+$prefix ="";
 
 echo "<center>";
 echo "<table>";
@@ -17,7 +18,7 @@ echo "  </thead>";
 echo "  <tbody>";
 
 echo "  <tr>";
-echo "      <tr><td><img class=\"graph\" src=\"temp_graphs/health_of_system.png\" alt=\"hardware graph\" ></td></tr>";
+echo "      <tr><td><img class=\"graph\" src=\"$prefix/temp_graphs/health_of_system.png\" alt=\"hardware graph\" ></td></tr>";
 echo "  </tr>";
 
 
