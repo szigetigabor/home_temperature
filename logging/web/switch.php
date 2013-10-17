@@ -38,7 +38,7 @@ include 'menu.php';
 $switch_ids = glob($sensors_path . "29-*");
 
 //print each sensor device
-foreach($devices as $device)
+foreach($switch_devices as $device)
 {
   $device_name=substr($device, strrpos($device, "/")+1);
   $settings_path=$sensors_settings_path."/".$device_name;

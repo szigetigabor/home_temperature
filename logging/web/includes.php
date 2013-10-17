@@ -7,6 +7,8 @@ $sensors_owfs_path = "/mnt/1wire/";
 $devices = glob($sensors_path . "*");
 $devices = array_merge($devices, glob($sensors_owfs_path . "28*"));
 
+$switch_devices = array_merge(array("/main_pump"), $devices);
+
 //path to stored 1-wire sensors settings
 $sensors_settings_path = "/home/pi/logging";
 
