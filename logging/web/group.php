@@ -1,6 +1,6 @@
 <?php
 require_once('includes.php');
-#include 'menu.php';
+include 'menu.php';
 
 //POST FORM START
 if (count($_POST) > 0 && isset($_POST["group"])){
