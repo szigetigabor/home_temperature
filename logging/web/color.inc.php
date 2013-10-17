@@ -1,6 +1,47 @@
 <?
+function temp2farbeindoor($temperatur)
+{
+  $anzahl = 21;
+  $colors[0] = "30003d"; $temp[0] = -14;
+  $colors[1] = "500064"; $temp[1] = 15;
+  $colors[2] = "4801a7"; $temp[2] = 16;
+  $colors[3] = "3200de"; $temp[3] = 17;
+  $colors[4] = "1005f9"; $temp[4] = 18;
+  $colors[5] = "0032f8"; $temp[5] = 19;
+  $colors[6] = "0259fe"; $temp[6] = 20;
+  $colors[7] = "0097dc"; $temp[7] = 21;
+  $colors[8] = "00cd88"; $temp[8] = 22;
+  $colors[9] = "00e448"; $temp[9] = 23;
+  $colors[10] = "35fa14"; $temp[10] = 24;
+  $colors[11] = "80ff00"; $temp[11] = 25;
+  $colors[12] = "c3ff05"; $temp[12] = 26;
+  $colors[13] = "fef102"; $temp[13] = 27;
+  $colors[14] = "ffca00"; $temp[14] = 28;
+  $colors[15] = "ff820b"; $temp[15] = 29;
+  $colors[16] = "fa4403"; $temp[16] = 30;
+  $colors[17] = "ff1500"; $temp[17] = 31;
+  $colors[18] = "ed0000"; $temp[18] = 32;
+  $colors[19] = "ab0000"; $temp[19] = 33;
+  $colors[20] = "690005"; $temp[20] = 40;
 
-function temp2farbe($temperatur)
+
+  for ($i=0;$i<$anzahl;$i++)
+  {
+    if (($temperatur >= $temp[$i]) && ($temperatur < $temp[$i+1]))
+    {
+      $color1 = $colors[$i];
+      $color2 = $colors[$i+1];
+      $temp1 = $temp[$i];
+      $temp2 = $temp[$i+1];
+    }
+  }
+
+  $perc = ($temperatur - $temp1)/($temp2-$temp1);
+
+  return farbinterpol($color1, $color2, $perc);
+}
+
+function temp2farbeoutdoor($temperatur)
 {
   $anzahl = 10;
   $colors[0] = "022887"; $temp[0] = -20;
