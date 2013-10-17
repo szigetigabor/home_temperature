@@ -13,7 +13,10 @@ then
   exit 1
 fi
 
-script_path="/home/pi/logging"
+prefix=$(dirname $0)
+source $prefix/config_temp.sh
+
+script_path=$sensor_settings_path #"/home/pi/logging"
 
 device_id=$1
 port=$2
@@ -91,9 +94,12 @@ while [ "$control_status" != "$Nnext_value" ]; do
 done
 
 # Turn ON/OFF the main pump
+gpio=11
 if [ "$next_value" == "FF" ]
 then
     echo "Pump turn OFF."
+    sudo $sensor_settings_path/main_pump.py $gpio false
 else
     echo "Pump turn ON."
+    sudo $sensor_settings_path/main_pump.py $gpio true
 fi
