@@ -83,11 +83,11 @@ GPRINT:Plus5V:LAST:"Cur\: %5.2lf" \
 GPRINT:Plus5V:AVERAGE:"Avg\: %5.2lf" \
 GPRINT:Plus5V:MAX:"Max\: %5.2lf" \
 GPRINT:Plus5V:MIN:"Min\: %5.2lf\n" \
-LINE1:Neg12V#330066:"-12V    " \
-GPRINT:Neg12V:LAST:"Cur\: %5.2lf" \
-GPRINT:Neg12V:AVERAGE:"Avg\: %5.2lf" \
-GPRINT:Neg12V:MAX:"Max\: %5.2lf" \
-GPRINT:Neg12V:MIN:"Min\: %5.2lf\n" \
+LINE1:Neg12V#330066:"Users Nr" \
+GPRINT:Neg12V:LAST:"Cur\: %5.0lf" \
+GPRINT:Neg12V:AVERAGE:"Avg\: %5.0lf" \
+GPRINT:Neg12V:MAX:"Max\: %5.0lf" \
+GPRINT:Neg12V:MIN:"Min\: %5.0lf\n" \
 LINE1:LoadAvg#0000FF:"Load Avg" \
 GPRINT:LoadAvg:LAST:"Cur\: %5.2lf" \
 GPRINT:LoadAvg:AVERAGE:"Avg\: %5.2lf" \
