@@ -25,11 +25,11 @@ do
 
   JSON=`echo $JSON"{"`
   # Fill the JSON
-  JSON=`echo $JSON"id:"$id","`
-  JSON=`echo $JSON"Last value:"$lastValue","`
-  JSON=`echo $JSON"Alias:"$alias","`
-  JSON=`echo $JSON"Alarm value:"$alarm","`
-  JSON=`echo $JSON"Last modification:"$lastMod`
+  JSON=`echo $JSON"\"id\":\""$id\"","`
+  JSON=`echo $JSON"\"Last value\":\""$lastValue\"","`
+  JSON=`echo $JSON"\"Alias\":\""$alias\"","`
+  JSON=`echo $JSON"\"Alarm value\":\""$alarm\"","`
+  JSON=`echo $JSON"\"Last modification\":\""$lastMod\"`
   JSON=`echo $JSON"}"`
 
   if [[ "$id" != "$last" ]]

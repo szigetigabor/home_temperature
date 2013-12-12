@@ -17,14 +17,12 @@ temperature() {
 }
 
 adc() {
-    #Values="adc"
     Values=`./api_adc.sh`
     echo $Values
 }
 
 status() {
-    Values="status"
-    #Values=`./api_status.sh`
+    Values=`./api_status.sh`
     echo $Values
 }  
 
@@ -44,16 +42,15 @@ case "$FILTER" in
      status)
          STATUS=`status`
          JSON=`echo $JSON$STATUS`
-
          ;;
 
      *)
          TEMPS=`temperature`
-         TEMPS=`echo "{temperature: ["$TEMPS"]}"`
+         TEMPS=`echo "{\"temperature\": ["$TEMPS"]}"`
          ADC=`adc`
-         ADC=`echo "{adc: ["$ADC"]}"`
+         ADC=`echo "{\"adc\": ["$ADC"]}"`
          STATUS=`status`
-         STATUS=`echo "{status: ["$STATUS"]}"`
+         STATUS=`echo "{\"status\": ["$STATUS"]}"`
 
          JSON=`echo -e $JSON$TEMPS",\n"$ADC",\n"$STATUS`
 
