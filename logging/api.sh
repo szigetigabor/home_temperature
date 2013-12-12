@@ -4,34 +4,60 @@ source $prefix/config_temp.sh
 
 cd $sensor_settings_path
 
+FILTER="all"
+
+if [ $# -gt 0 ]; then
+  FILTER=$1
+fi
+
+
+temperature() {
+    Values=`./api_temp.sh`
+    echo $Values
+}
+
+adc() {
+    #Values="adc"
+    Values=`./api_adc.sh`
+    echo $Values
+}
+
+status() {
+    Values="status"
+    #Values=`./api_status.sh`
+    echo $Values
+}  
+
+
 JSON="["
+case "$FILTER" in
+     temp)
+         TEMPS=`temperature`
+         JSON=`echo $JSON$TEMPS`
+         ;;
 
-#temperatures
-IDS=`ls -d */|grep 2`
+     adc)
+         ADC=`adc`
+         JSON=`echo $JSON$ADC`
+         ;;
 
-for id in $IDS
-do
-  # remove last character from the ID
-  id=`echo "${id%?}"`
+     status)
+         STATUS=`status`
+         JSON=`echo $JSON$STATUS`
 
-  DB=$db_prefix"_"$id.rrd
-  lastMod=`date -r $DB +%F\ %r%:z`
-  alias=`cat $id/alias 2> /dev/null`
-  alarm=`cat $id/alarm 2> /dev/null`
-  lastValue=`rrdtool lastupdate $DB|tail -1|cut -c 13-`
+         ;;
 
-  JSON=`echo $JSON"{"`
-  # Fill the JSON
-  JSON=`echo $JSON"id:"$id","`
-  JSON=`echo $JSON"Last value:"$lastValue","`
-  JSON=`echo $JSON"Alias:"$alias","`
-  JSON=`echo $JSON"Alarm value:"$alarm","`
-  JSON=`echo $JSON"Last modification:"$lastMod`
-  JSON=`echo $JSON"},"`
-done
+     *)
+         TEMPS=`temperature`
+         TEMPS=`echo "{temperature: ["$TEMPS"]}"`
+         ADC=`adc`
+         ADC=`echo "{adc: ["$ADC"]}"`
+         STATUS=`status`
+         STATUS=`echo "{status: ["$STATUS"]}"`
 
-#
+         JSON=`echo -e $JSON$TEMPS",\n"$ADC",\n"$STATUS`
 
+esac
 
 JSON=`echo $JSON"]"`
 
