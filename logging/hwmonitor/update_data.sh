@@ -42,7 +42,16 @@ health_info() {
   _Plus12V=0;
   _Plus3V=0;
   _Plus5V=0;
+
   _Neg12V=`top -bn1|head -1|cut -f 8 -d " "`; #online users
+  re='^[0-9]+$'
+  if ! [[ $_Neg12V =~ $re ]] || [ "$_Neg12V" = "min," ]; then
+    _Neg12V=`top -bn1|head -1|cut -f 10 -d " "`; #online users
+  fi
+
+  if ! [[ $_Neg12V =~ $re ]]; then
+    _Neg12V=`top -bn1|head -1|cut -f 9 -d " "`; #online users
+  fi
 
   _CpuSpeed=`expr $_CpuSpeed / 1000000`;
   _GpuSpeed=`expr $_GpuSpeed / 1000000`;
