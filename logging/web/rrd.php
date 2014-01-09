@@ -1,33 +1,63 @@
 <?php
+include 'calendar.php';
+if (empty($_GET)) {
+  exit;
+}
+echo "<center>";
+
 $device="28-0000040009a1";
 $alias=$device;
-create_graph($device, $alias, "/var/www/login-hour.gif", "-1h", "Hourly temperature graph");
-create_graph($device, $alias, "/var/www/login-day.gif", "-1d", "Daily temperature graph");
-create_graph($device, $alias, "/var/www/login-week.gif", "-1w", "Weekly temperature graph");
-create_graph($device, $alias, "/var/www/login-month.gif", "-1m", "Monthly temperature graph");
-create_graph($device, $alias, "/var/www/login-year.gif", "-1y", "Yearly temperature graph");
+$prefix="..";
+
+$start="-1h";
+if (isset($_GET["start_date"])) {
+  $start=$_GET["start_date"];
+  $start=strtotime($start);
+}
+if (isset($_GET["end_date"])) {
+  $end=$_GET["end_date"];
+  $end=strtotime($end);
+  create_graph($device, $alias, "$prefix/login-hour.gif", "Hourly temperature graph", $start, $end);
+} else {
+  create_graph($device, $alias, "$prefix/login-hour.gif", "Hourly temperature graph", $start);
+  //create_graph($device, $alias, "$prefix/login-day.gif", "Daily temperature graph", "-1d");
+  //create_graph($device, $alias, "$prefix/login-week.gif", "Weekly temperature graph", "-1w");
+  //create_graph($device, $alias, "$prefix/login-month.gif", "Monthly temperature graph", "-1m");
+  //create_graph($device, $alias, "$prefix/login-year.gif", "Yearly temperature graph", "-1y");
+}
 
 echo "<table>";
 echo "<tr><td>";
-echo "<img src='login-hour.gif' alt='Generated RRD image'>";
+echo "<img src='$prefix/login-hour.gif' alt='Generated RRD image'>";
 echo "</td><tr>";
-echo "<tr><td>";
-echo "<img src='login-day.gif' alt='Generated RRD image'>";
-echo "</td><td>";
-echo "<img src='login-week.gif' alt='Generated RRD image'>";
-echo "</td></tr>";
-echo "<tr><td>";
-echo "<img src='login-month.gif' alt='Generated RRD image'>";
-echo "</td><td>";
-echo "<img src='login-year.gif' alt='Generated RRD image'>";
-echo "</td></tr>";
+//echo "<tr><td>";
+//echo "<img src='$prefix/login-day.gif' alt='Generated RRD image'>"; 
+//echo "</td><td>";
+//echo "<img src='$prefix/login-week.gif' alt='Generated RRD image'>";
+//echo "</td></tr>";
+//echo "<tr><td>";
+//echo "<img src='$prefix/login-month.gif' alt='Generated RRD image'>";
+//echo "</td><td>";
+//echo "<img src='$prefix/login-year.gif' alt='Generated RRD image'>";
+//echo "</td></tr>";
 echo "</table>";
+
+echo "</center>";
 exit;
 
-function create_graph($deviceID,$alias, $output, $start, $title) {
+function create_graph($deviceID,$alias, $output, $title, $start, $end) {
+  if (empty($end)) {
+    $end=now;
+  }
+  if ( $end > $start ) {
+  //  $tmp=$end;
+  //  $end=$start;
+  //  $start=$tmp;
+  }
   $options = array(
     "--slope-mode",
     "--start", $start,
+    "--end", $end,
     "--title=$title",
     "--vertical-label=Termperature (C)",
 //    "--lower=0",
@@ -60,6 +90,7 @@ function create_graph($deviceID,$alias, $output, $start, $title) {
 //var_dump($ret);
   if (! $ret) {
     echo "<b>Graph error: </b>".rrd_error()."\n";
+    exit;
   }
 }
 
