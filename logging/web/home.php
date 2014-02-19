@@ -8,12 +8,19 @@ echo "<script src=\"jquery.knob.js\"></script>";
 //POST FORM START
 foreach($_POST as $key=>$value)
 {
+ if ($key[2] == "_" ) {
+  $key[2] = ".";
+ }
  $file = $sensors_settings_path."/".$key."/alarm";
  write_file($file,$value);
 
  // update the relays
  $command = "/bin/bash $sensors_settings_path/alarm_checking.sh $key";
  exec ($command, $output_post);
+
+ $command = "/bin/bash $sensors_settings_path/alarm_checking_owfs.sh $key";
+ exec ($command, $output_post2);
+
  //$output = system($command, $retval);
 }
 //FORM END
