@@ -98,8 +98,11 @@ gpio=11
 if [ "$next_value" == "FF" ]
 then
     echo "Pump turn OFF."
-    sudo $sensor_settings_path/main_pump.py $gpio false
+    cmd="nohup sudo $sensor_settings_path/main_pump.py $gpio false"
+    $cmd &
 else
     echo "Pump turn ON."
-    sudo $sensor_settings_path/main_pump.py $gpio true
+    cmd="nohup sudo $sensor_settings_path/main_pump.py $gpio true"
+    $cmd &
 fi
+exit 0
