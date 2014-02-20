@@ -18,7 +18,7 @@ foreach($_POST as $key=>$value)
  $command = "/bin/bash $sensors_settings_path/alarm_checking.sh $key > /dev/null 2>&1 &";
  exec ($command, $output_post);
 
- $command = "/bin/bash $sensors_settings_path/alarm_checking_owfs.sh $key > /dev/null 2>&1 &";
+ $command = "/bin/bash $sensors_settings_path/alarm_checking.sh $key owfs > /dev/null 2>&1 &";
  exec ($command, $output_post2);
 
  //$output = system($command, $retval);

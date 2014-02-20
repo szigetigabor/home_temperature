@@ -3,7 +3,12 @@
 prefix=$(dirname $0)
 source $prefix/config_temp.sh
 
-for line in $sensors
+_sensors=$sensors;
+if [ "$2" == "owfs" ]; then
+  _sensors=$sensors_owfs;
+fi
+
+for line in $_sensors
 do
    if [[ $# == 1 && $1 != $line ]]; then
       continue
@@ -70,7 +75,7 @@ do
 
       deviceID=${switch:0:15}
       port=${switch:16:1}
-      heating_mode=""; 
+      heating_mode="";
       if [ $temp -lt $alarm ]; then
         heating_mode="on";
         $sensor_settings_path/switch_set.sh $deviceID $port 1
@@ -80,7 +85,7 @@ do
       fi
 
       echo "$line: heating " `echo $heating_mode | tr '[:lower:]' '[:upper:]'`;
-      echo $heating_mode > $sensor_settings_path/$line/onoff
+      #echo $heating_mode > $sensor_settings_path/$line/onoff
       
   fi
 done
