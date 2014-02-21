@@ -10,7 +10,7 @@ fi
 
 for line in $_sensors
 do
-   if [[ $# == 1 && $1 != $line ]]; then
+   if [[ $# == 1 && $1 != $line ]] | [[ $# == 2  && $1 != $line && $1 != "all" ]]; then
       continue
    fi
    if [ -d $sensor_settings_path/$line ]; then

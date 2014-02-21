@@ -42,5 +42,5 @@ do
   sleep 1
 done
 
-./alarm_checking_owfs.sh
+./alarm_checking.sh all owfs
 
