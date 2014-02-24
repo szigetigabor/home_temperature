@@ -25,7 +25,7 @@ i=0
 line=""
 # Create rrdtool parameters
 now=`date +%s`
-mode_time=`stat -c %Y $file`
+mode_time=`last_mod $file`
 if [ $(echo "$now - $mode_time" | bc) -gt ${delay[$1]} ]; then
   parameters="${parameters} DEF:lux${line}=${db_prefix}${line}.rrd:lux:AVERAGE LINE1:lux${line}${colors[$i]}:$alias \
               GPRINT:lux${line}:MIN:min\:%5.2lf%sV GPRINT:lux${line}:LAST:last\:%2.2lf%sV GPRINT:lux${line}:MAX:max\:%2.2lf%sV\n "

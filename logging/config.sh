@@ -25,3 +25,13 @@ delay['w']=86400    #delay['d'] * 24
 delay['m']=604800   #delay['w'] * 7
 delay['y']=2419200  #delay['d'] * 4
 
+
+function last_mod {
+  file=$1
+  mode_time=`stat -c %Y $file 2> /dev/null`
+  if [ "$mode_time" == "" ]; then
+    mode_time=0;
+  fi
+  echo $mode_time
+}
+
