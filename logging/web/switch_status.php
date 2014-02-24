@@ -134,14 +134,14 @@ foreach($switches as $switch_id)
     $disabled="";
     if ($who_use_it != ""){
       $disabled="disabled";
-      // ON/OFF
-      $onoff = read_file($sensors_settings_path."/".$who_use_it."/onoff");
-      $onoff = trim($onoff, " \n.");
+      #// ON/OFF
+      #$onoff = read_file($sensors_settings_path."/".$who_use_it."/onoff");
+      #$onoff = trim($onoff, " \n.");
 
-      if ($onoff == "on"){      
-        $checked="checked";
-      }
-    } else {
+      #if ($onoff == "on"){      
+      #  $checked="checked";
+      #}
+    } #else {
       $onoff= substr($switch_output[0],8-$i,1);
       if ($onoff == "0"){
         $onoff="on";
@@ -150,7 +150,7 @@ foreach($switches as $switch_id)
       if ($onoff == "1"){
         $onoff="off";
       }
-    }
+    #}
     echo "  <td>";
     echo "    <form method=\"post\">";
     echo "      <input type=\"hidden\" name=\"device\" value=\"$switch_id_name\">";
