@@ -6,4 +6,5 @@ $prefix/send_to_gdocs.sh &
 $prefix/update_volt.sh
 $prefix/hwmonitor/update_data.sh
 $prefix/update_lux.sh
+$prefix/update_humidity.sh
 $prefix/owfs_check.sh
