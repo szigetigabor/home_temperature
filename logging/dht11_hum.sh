@@ -18,5 +18,4 @@ while true; do
     exit
   fi
   sleep 3
-  exit
 done
