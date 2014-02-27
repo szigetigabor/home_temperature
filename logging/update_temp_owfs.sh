@@ -38,6 +38,7 @@ do
      ./make_temps_owfs.sh
   fi
   rrdtool update $DB N:$temp
+  ./update_temp_sql.py $line $temp
 
   sleep 1
 done

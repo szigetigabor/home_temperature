@@ -46,6 +46,7 @@ do
   fi
   rrdtool update $DB N:$temp
 
+  ./update_temp_sql.py $line $temp
 #  alias=$line
 #  if [ -e $line/alias ]; then
 #    alias=`cat $line/alias`
