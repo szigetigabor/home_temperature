@@ -1,8 +1,8 @@
 <?php
 require_once('includes.php');
 
-echo "<script src=\"jquery.min.js\"></script>";
-echo "<script src=\"jquery.knob.js\"></script>";
+echo "<script src=\"js/jquery.min.js\"></script>";
+echo "<script src=\"js/jquery.knob.js\"></script>";
 
 //POST FORM START
 foreach($_POST as $key=>$value)

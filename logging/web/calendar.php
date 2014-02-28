@@ -1,6 +1,6 @@
 <?php
 //  <title>Traffic and load RRD stats</title>
-echo("  <script type=\"text/javascript\" src=\"./CalendarPopup.js\"></script>");
+echo("  <script type=\"text/javascript\" src=\"js/CalendarPopup.js\"></script>");
 echo("  <script type=\"text/javascript\">document.write(getCalendarStyles());</script>");
 echo "<style>";
 echo "        form {";

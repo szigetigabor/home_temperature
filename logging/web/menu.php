@@ -1,4 +1,4 @@
-<script type="text/javascript" src="prototype.js"></script>
+<script type="text/javascript" src="js/prototype.js"></script>
 <script type="text/javascript"> new Ajax.PeriodicalUpdater('clock', 'clock.php', {   method: 'get',   frequency: 1 });</script>
 
 <div id="clock"></div>
