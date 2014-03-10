@@ -5,7 +5,7 @@ source $prefix/config_lux.sh
 cd $sensor_settings_path
 
 # Read lux from sensor
-lux=`./mcp3008_read.py 2 lux>adc_error;`
+lux=`./mcp3008_read.py 0 lux 2>adc_error;`
 
 # Update database
 if [ ! -e $DB ]; then
