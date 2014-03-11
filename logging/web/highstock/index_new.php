@@ -5,6 +5,39 @@ require_once('../5004/includes.php');
 <html>
 
 <body>
+
+<?php
+// GET FORM START
+$get_group="";
+$get_selected="";
+$setting=false;
+if (isset($_GET["filter"])) {
+   $get_group=$_GET["filter"];
+   $file = $group_settings_path."/".$get_group;
+   $get_selected = read_file($file);
+   $get_selected = explode(', ', $get_selected);
+   $setting=true;
+}  
+//FORM END
+
+echo "<div> <form method=\"get\">";
+echo " <select name=\"filter\">";
+foreach($groups as $group)
+{
+  $group_name = substr($group, strrpos($group, "/")+1);
+  $selected = "";
+  if ("$get_group" == "$group_name") {
+    $selected = "selected";
+  }  
+  echo " <option value=\"$group_name\" $selected>$group_name</option>";
+ 
+}
+echo " </select>";
+echo " <input type=\"submit\" value=\"Filter\">";
+echo " </form></div>";
+
+?>
+
 <div class="container">
 	<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 </div> <!--end container-->
@@ -44,7 +77,12 @@ foreach($switch_devices as $device)
   $settings_path=$sensors_settings_path."/".$device_name;
   $device_alias = read_file($settings_path."/alias");
   $device_alias = substr($device_alias,0,-1);
-  echo "                        {name: '$device_alias', id: '$device_name' },\n";
+  if ($device_alias == "") {
+     $device_alias = $device_name;
+  }
+  if (in_array($device_alias,$get_selected) || !$setting) {
+    echo "                        {name: '$device_alias', id: '$device_name' },\n";
+  }
 }
 ?>
 //                        {name: 'device_alias', id: '28.C0108F040000', pointStart: start }
