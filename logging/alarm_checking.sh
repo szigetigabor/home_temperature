@@ -35,8 +35,8 @@ do
           continue
       fi
 
-      alarm=`cat $sensor_settings_path/$line/alarm;`
-      #alarm=`$sensor_settings_path/get_alarm.sh $line;`
+      #alarm=`cat $sensor_settings_path/$line/alarm;`
+      alarm=`$sensor_settings_path/get_alarm.sh $line;`
 
       # convert the alarm temperature
       pos=`expr index "$alarm" .`
