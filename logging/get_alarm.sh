@@ -30,6 +30,11 @@ elif [ $main_mode == "Auto" ]; then
         echo $alarm
     else
         mode=`cat $sensor_settings_path/$deviceID/mode;`
+        if [ "$mode" == "" ]; then
+          alarm=`cat $sensor_settings_path/$deviceID/alarm;`
+          echo $alarm
+          exit 0
+        fi
         mode_value=`cat $sensor_settings_path/modes/$mode;`
 
         # split the mode valus to array
