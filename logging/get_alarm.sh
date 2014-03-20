@@ -18,21 +18,18 @@ elif [ $main_mode == "Manual" ]; then
     if [ ! -e $sensor_settings_path/$deviceID/alarm ]; then
         echo $alarm
     else
-        alarm=`cat $sensor_settings_path/$deviceID/alarm;`
-        echo $alarm
+        alarm_from_file $deviceID
     fi
     
 elif [ $main_mode == "Auto" ]; then
     if [ ! -e $sensor_settings_path/$deviceID/mode ]; then
         #echo "No mode set for the following device: $deviceID"
         #echo "Use the alarm value for this device."
-        alarm=`cat $sensor_settings_path/$deviceID/alarm;`
-        echo $alarm
+        alarm_from_file $deviceID
     else
         mode=`cat $sensor_settings_path/$deviceID/mode;`
         if [ "$mode" == "" ]; then
-          alarm=`cat $sensor_settings_path/$deviceID/alarm;`
-          echo $alarm
+          alarm_from_file $deviceID
           exit 0
         fi
         mode_value=`cat $sensor_settings_path/modes/$mode;`

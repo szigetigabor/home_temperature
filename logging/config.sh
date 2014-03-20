@@ -35,3 +35,9 @@ function last_mod {
   echo $mode_time
 }
 
+function alarm_from_file {
+    deviceID=$1;
+    alarm=`cat $sensor_settings_path/$deviceID/alarm;`
+    echo $alarm
+}
+
