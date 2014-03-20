@@ -18,11 +18,13 @@ source $prefix/config_humidity.sh
 
 cd $sensor_settings_path
 
+port=$2
+
 # Read humidity from DB
-file=$www_path/humidity_${1}.png
+file=$www_path/humidity_${port}_${1}.png
 parameters="graph $file --start -1${1} --title ${title[$1]}"
 i=0
-line=""
+line="_"$port
 # Create rrdtool parameters
 now=`date +%s`
 mode_time=`last_mod $file`
