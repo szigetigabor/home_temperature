@@ -168,7 +168,10 @@ foreach($devices as $device)
       echo "       <img src=\"\" width=\"1\" height=\"15\">";
       echo "       <form method=\"post\">";
       echo "      <input type=\"test\" class=\"dial\" name=\"$device_id\" data-min=\"160\" data-max=\"300\" value=\"$alarm\" data-width=\"200\" data-fgColor=\"#888888\" data-cursor=true data-angleOffset=-125 data-angleArc=250 data-displayPrevious=true $global_disabled>";
-      echo "      <input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
+      if ( ($global_mode == "Auto" && $mode != "" )|| $global_mode == "OFF"  ) {}
+      else {
+        echo "      <br><input type=\"submit\" value=\"Set\" class=\"buttonclass\" $global_disabled>";
+      }
       echo "</form>";
       echo "  </td>";
   } else {
