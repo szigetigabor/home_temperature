@@ -76,7 +76,11 @@ do
       deviceID=${switch:0:15}
       port=${switch:16:1}
       heating_mode="";
-      if [ $temp -lt $alarm ]; then
+      op="-lt"
+      if [ -e $cooling_file ]; then
+        op="-gt"
+      fi
+      if [ $temp $op $alarm ]; then
         heating_mode="on";
         $sensor_settings_path/switch_set.sh $deviceID $port 1
       else

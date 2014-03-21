@@ -24,6 +24,11 @@ function write_file_extra($path, $data, $mode){
     fclose($fn);
 }
 
+function remove_file($path){
+    $retval = unlink($path);
+    return $retval;
+}
+
 
 function language(){
     global $sensors_settings_path;
@@ -48,8 +53,9 @@ $ip=$_SERVER['REMOTE_ADDR'];
 //echo "<p><b>Your IP Address= $ip</b>"; 
 
 
-$off_modes = array("Auto", "OFF");
-$off_modes_select = array("Auto", "Manual", "OFF");
+$heating_or_cooling=array("Heating", "Cooling");
+$off_modes = array("Manual", "OFF");
+$off_modes_select = array("Manual", "Auto", "OFF");
 
 
 $time_values = array("0:30","1","1:30","2","2:30","3","3:30","4","4:30","5","5:30","6",

@@ -14,6 +14,7 @@ $sensors_settings_path = "/home/pi/logging";
 
 
 //path to the modes settings
+$heating_mode_path = "$sensors_settings_path/cooling";
 $mode_settings_path = "$sensors_settings_path/modes";
 
 //get all modes files.

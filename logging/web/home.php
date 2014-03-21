@@ -41,7 +41,8 @@ $global_mode = trim($global_mode, " \n.");
 if ($global_mode == "") {
     $global_mode="Manual";
 }
-echo "Mode: $global_mode";
+$size=42;
+echo "Mode: <img src=\"images/$global_mode\" alt=\"$global_mode\" height=\"$size\" width=\"$size\" class=\"buttonclass\" > ";
 
 
 $global_disabled = "disabled=\"disabled\"";
