@@ -117,34 +117,6 @@ table.water
   width: 200
 }
 
-tr.water
-{
-  border:1px solid lightgray;
-  text-align:center;
-  vertical-align:middle;
-  padding:3px;
-  border-spacing:8px;
-
-  box-shadow: 3px 3px 10px #888888;
-
-  -moz-border-radius-bottomleft:5px;
-  -webkit-border-bottom-left-radius:5px;
-  border-bottom-left-radius:5px;
-
-  -moz-border-radius-bottomright:5px;
-  -webkit-border-bottom-right-radius:5px;
-  border-bottom-right-radius:5px;
-
-  -moz-border-radius-topright:5px;
-  -webkit-border-top-right-radius:5px;
-  border-top-right-radius:5px;
-
-  -moz-border-radius-topleft:5px;
-  -webkit-border-top-left-radius:5px;
-  border-top-left-radius:5px;
-}
-
-
 td.on
 {
   border:1px solid d;
