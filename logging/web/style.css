@@ -75,7 +75,7 @@ td#off
   background-color:#00FF00; /* green*/
 }
 
-table#mode, tr#mode, td#mode, table#group, tr#group, td#group
+table#mode, tr#mode, td#mode, table#group, tr#group, td#group, td.on, td.off
 {
   border:0px;
   padding:0px;
@@ -109,6 +109,63 @@ table#mode, tr#mode, td#mode, table#group, tr#group, td#group
 
 }
 
+/**************
+ * Water tank *
+ **************/
+table.water
+{
+  width: 200
+}
+
+tr.water
+{
+  border:1px solid lightgray;
+  text-align:center;
+  vertical-align:middle;
+  padding:3px;
+  border-spacing:8px;
+
+  box-shadow: 3px 3px 10px #888888;
+
+  -moz-border-radius-bottomleft:5px;
+  -webkit-border-bottom-left-radius:5px;
+  border-bottom-left-radius:5px;
+
+  -moz-border-radius-bottomright:5px;
+  -webkit-border-bottom-right-radius:5px;
+  border-bottom-right-radius:5px;
+
+  -moz-border-radius-topright:5px;
+  -webkit-border-top-right-radius:5px;
+  border-top-right-radius:5px;
+
+  -moz-border-radius-topleft:5px;
+  -webkit-border-top-left-radius:5px;
+  border-top-left-radius:5px;
+}
+
+
+td.on
+{
+  border:1px solid d;
+  background-color:blue;
+}
+
+font.on
+{
+  color: blue;
+}
+
+td.off
+{
+  border:1px solid #FFFFFF;
+  background-color:#FFFFFF; /* white*/
+}
+
+font.off
+{
+  color: white;
+}
 /**************
  * MENU style *
  **************/
@@ -553,8 +610,8 @@ div#menu_arrow {float:right}
  *   Others   *
  **************/
 img.graph {
-    height:75%;
-    width:75%;
+    #height:75%;
+    #width:75%;
 }
 
 #clock {
