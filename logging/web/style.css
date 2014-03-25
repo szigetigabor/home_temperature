@@ -114,7 +114,9 @@ table#mode, tr#mode, td#mode, table#group, tr#group, td#group, td.on, td.off
  **************/
 table.water
 {
-  width: 200
+  width: 200;
+  padding:8px;
+  border-spacing:0px;
 }
 
 td.on
