@@ -22,6 +22,7 @@
          <li><a href='tank_level.php'><span>Water tank level</span></a></li>
       </ul>
    </li>
+   <li class='has-sub '><a href='outside/dashboard.php'><span>Outside</span></a>
 <?php
 require_once('includes.php');
 

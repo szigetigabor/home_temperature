@@ -24,8 +24,9 @@ $read_command="$sensors_settings_path/switch_read.sh $switch_id_name";
 exec ($read_command, $switch_output);
 
 $top_of_water=false;
-for($i=8; $i>0; $i--){
-      $status= substr($switch_output[0],8-$i,1);
+$levels=8;
+for($i=$levels; $i>0; $i--){
+      $status= substr($switch_output[0], $levels-$i,1);
       if ($status == "0"){
         $status="on";
         $checked="checked";
@@ -38,7 +39,7 @@ for($i=8; $i>0; $i--){
   if ( !$top_of_water && $status == "on" ){
     $top_of_water = true;
     $status_font = "top";
-    $value=$i/8*100;
+    $value=$i/$levels*100;
   }
   if ( !$top_of_water && $status == "off" && $i == 1 ){
     $status_font = "empty";
