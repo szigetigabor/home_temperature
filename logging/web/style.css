@@ -123,21 +123,28 @@ td.on
   background-color:blue;
 }
 
-font.on
-{
-  color: blue;
-}
-
 td.off
 {
   border:1px solid #FFFFFF;
   background-color:#FFFFFF; /* white*/
 }
 
+font.on
+{
+  color: blue;
+}
+
 font.off
 {
   color: white;
 }
+
+font.top
+{
+  color: yellow;
+  font-weight: bold;
+}
+
 /**************
  * MENU style *
  **************/

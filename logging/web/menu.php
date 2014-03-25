@@ -19,6 +19,7 @@
          <li><a href='lux_graph.php'><span>LUX</span></a></li>
          <li><a href='hw_graph.php'><span>Hardware Monitoring</span></a></li>
          <li><a href='volt_graph.php'><span>Volt</span></a></li>
+         <li><a href='tank_level.php'><span>Water tank level</span></a></li>
       </ul>
    </li>
 <?php
