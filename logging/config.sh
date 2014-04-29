@@ -38,7 +38,7 @@ function last_mod {
 
 function alarm_from_file {
     deviceID=$1;
-    alarm=`cat $sensor_settings_path/$deviceID/alarm;`
+    alarm=`cat $sensor_settings_path/$deviceID/alarm 2> /dev/null;`
     echo $alarm
 }
 
