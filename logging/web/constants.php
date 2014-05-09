@@ -5,7 +5,7 @@ $sensors_path = "/sys/bus/w1/devices/";
 $sensors_owfs_path = "/mnt/1wire/";
 //get all sensors files.
 $devices = glob($sensors_path . "*");
-$devices = array_merge($devices, glob($sensors_owfs_path . "28*"));
+$devices = array_unique(array_merge($devices, glob($sensors_owfs_path . "28*")));
 
 $switch_devices = array_merge(array("/main_pump"), $devices);
 
