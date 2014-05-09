@@ -55,7 +55,7 @@ if ($global_mode == "") {
     $global_mode="";
 }
 $global_disabled = "disabled=\"disabled\"";
-if ($global_mode == "Manual") {
+if ($global_mode == "Auto") {
     $global_disabled = "";
 }
 
