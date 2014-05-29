@@ -56,7 +56,10 @@ health_info() {
   _CpuSpeed=`expr $_CpuSpeed / 1000000`;
   _GpuSpeed=`expr $_GpuSpeed / 1000000`;
 
-  _LoadAvgAll=`top -bn1|head -1|cut -f 15 -d " "`;
+  _LoadAvgAll=`top -bn1|head -1|cut -f 14 -d " "`;
+  if [ "$_LoadAvgAll" = " " ] || [ "$_LoadAvgAll" = "average:" ]; then
+    _LoadAvgAll=`top -bn1|head -1|cut -f 15 -d " "`;
+  fi
   _LoadAvgfirst=`echo $_LoadAvgAll|cut -f 1 -d ","`;
   _LoadAvglast=`echo $_LoadAvgAll|cut -f 2 -d ","`;
   _LoadAvg=`echo "$_LoadAvgfirst.$_LoadAvglast"`;
