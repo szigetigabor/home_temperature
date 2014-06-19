@@ -145,7 +145,9 @@ foreach($devices as $device)
   // ON/OFF
   $onoff = read_file($settings_path."/onoff");
   $onoff = trim($onoff, " \n.");
-  if ($alarm!=50 && $value < ($alarm/10)) {
+  $cooling = file_exists($sensors_settings_path."/cooling");
+  if ( ($alarm!=50 && (!$cooling && $value < ($alarm/10))) ||
+       ($alarm!=0  && ( $cooling && $value > ($alarm/10))) ) {
       $onoff="on";
   } else {
       if ($onoff == "") {
