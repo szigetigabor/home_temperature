@@ -41,6 +41,11 @@ else
 fi
 
 switch_output="/sys/bus/w1/devices/$device_id/output"
+if [ ! -f $switch_output ]; then
+    echo "Device ($device_id) does not exist."
+    exit 1
+fi
+
 grant=`ls -l $switch_output`
 
 if [ `echo ${grant:7:2}` == "rw" ]; then
