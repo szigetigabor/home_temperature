@@ -82,7 +82,9 @@ if [ ${#next_value} -eq 1 ]; then
     Nnext_value="0"$next_value
 fi
 
-while [ "$control_status" != "$Nnext_value" ]; do
+nr=0
+limit=5
+while [ "$control_status" != "$Nnext_value" ] || [ $nr -le $limit ]; do
     echo "write: $Nnext_value"
     # write to the switch
     echo -e '\x'`echo $next_value` |dd of=$switch_output bs=1 count=1 2>>/dev/null
@@ -90,6 +92,7 @@ while [ "$control_status" != "$Nnext_value" ]; do
     # read back the new status
     control_status=`$script_path/switch_read.sh $device_id hexa`
     echo "read: $control_status"
+    let "nr=nr+1"
     sleep 1
 done
 
