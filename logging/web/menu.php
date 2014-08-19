@@ -16,6 +16,7 @@
       <ul>
          <li><a href='temp_graph.php'><span>Temperature</span></a></li>
          <li><a href='humidity_graph.php'><span>Humidity</span></a></li>
+         <li><a href='pressure_graph.php'><span>Pressure</span></a></li>
          <li><a href='lux_graph.php'><span>LUX</span></a></li>
          <li><a href='hw_graph.php'><span>Hardware Monitoring</span></a></li>
          <li><a href='volt_graph.php'><span>Volt</span></a></li>

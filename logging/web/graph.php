@@ -9,6 +9,12 @@ function create_graph($type, $port="") {
   if ($type == "humidity") {
      $parameter=$port;
   }
+  if ($type == "pressure") {
+     $parameter=$port;
+     $command = "/bin/bash $sensors_settings_path/create_".$type."_graph.sh ".$parameter;
+     exec ($command, $output);
+  }
+
   $command = "/bin/bash $sensors_settings_path/create_".$type."_graph.sh h ".$parameter;
   exec ($command, $output);
   $command = "/bin/bash $sensors_settings_path/create_".$type."_graph.sh d ".$parameter;
@@ -37,6 +43,12 @@ function create_graph($type, $port="") {
   if ($type == "humidity") {
      $type=$type."_".$port;
   }
+  if ($type == "pressure") {
+     $type=$type."_".$port;
+     echo "      <tr><td><img class=\"graph\" src=\"$prefix_path/temp_graphs/".$type.".png\" alt=\"hourly graph\" ></td></tr>";
+     exit;
+  }
+
   echo "  <tr>";
   echo "      <tr><td><img class=\"graph\" src=\"$prefix_path/temp_graphs/".$type."_h.png\" alt=\"hourly graph\" ></td></tr>";
   echo "      <tr><td><img class=\"graph\" src=\"$prefix_path/temp_graphs/".$type."_d.png\" alt=\"daily graph\" /></td></tr>";
